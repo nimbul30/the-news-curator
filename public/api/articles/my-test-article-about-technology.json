@@ -1,0 +1,14 @@
+{
+  "id": "6904f554a4cc59e5d005e718",
+  "title": "My Test Article About Technology",
+  "slug": "my-test-article-about-technology",
+  "excerpt": "This is a test excerpt that is longer than 20 characters and provides a good summary.",
+  "content": "This is a much longer test article content that meets the minimum 50 character requirement. It contains detailed information about the topic and provides valuable insights for readers.",
+  "category": "Technology",
+  "author": "Test Author",
+  "publishedAt": "2025-10-31T17:43:48.451Z",
+  "viewCount": 0,
+  "customFields": {
+    "is_draft": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "your-article-slug-here",
+  "title": "Your Article Title Here",
+  "slug": "your-article-slug-here",
+  "excerpt": "Brief summary of your article (2-3 sentences)",
+  "category": "Politics",
+  "author": "Your Name",
+  "publishedAt": "2025-11-02T12:00:00.000Z",
+  "viewCount": 0,
+  "customFields": {
+    "spot_number": 37,
+    "image_url": "assets/your-image.png",
+    "youtube_embed_url": "",
+    "sources": "Paste your sources from verifier.html here",
+    "primary_source": "Main source URL",
+    "special_report_title": "Optional spotlight title",
+    "special_report_content": "Optional spotlight content",
+    "special_report_video": "",
+    "special_report_quotes": "Optional quotes from verifier",
+    "suggested_reading": "Paste suggested reading from verifier",
+    "bias_analysis": "Paste bias analysis from verifier",
+    "claim_source_mapping": "Paste claim mapping from verifier",
+    "rated_sources": "Paste source ratings from verifier",
+    "is_draft": false
+  },
+  "image_url": "assets/your-image.png"
+}

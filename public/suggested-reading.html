@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suggested Reading | The News Curator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pr-background': '#6b7d91',
+              'pr-nav': '#d8d3c4',
+              'pr-primary': '#182a38',
+              'pr-secondary': '#757d7f',
+              'pr-text-accent': '#eae7db',
+              'card-bg': '#eae7db',
+            },
+            fontFamily: {
+              display: ['Playfair Display', 'serif'],
+              body: ['Roboto', 'sans-serif'],
+            },
+            boxShadow: {
+              custom:
+                '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-pr-background font-body text-pr-text-accent">
+    <!-- Navigation Header -->
+    <header class="bg-card-bg shadow-custom sticky top-0 z-50">
+      <nav
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center">
+          <img
+            src="/assets/The News Curator.png"
+            alt="The News Curator Logo"
+            class="h-16 w-16 mr-4"
+          />
+          <div>
+            <a
+              class="text-xl md:text-2xl font-display font-bold text-pr-primary"
+              href="index.html"
+              >The News Curator</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a
+            href="index.html"
+            class="text-pr-primary hover:text-pr-secondary transition-colors duration-200 font-medium"
+            >Home</a
+          >
+          <a
+            href="transparency-page.html"
+            class="text-pr-primary hover:text-pr-secondary transition-colors duration-200 font-medium"
+            >Transparency</a
+          >
+          <a
+            href="special-report.html"
+            class="text-pr-primary hover:text-pr-secondary transition-colors duration-200 font-medium"
+            >Special Reports</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+      <div class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <header class="mb-8">
+          <h1 class="text-4xl font-display font-bold text-pr-primary mb-4">
+            Suggested Reading
+          </h1>
+          <p id="article-context" class="text-lg text-pr-secondary mb-6">
+            Dive deeper into the topics that matter
+          </p>
+        </header>
+
+        <!-- Main Content -->
+        <section class="bg-card-bg rounded-lg p-8 shadow-custom mb-8">
+          <div
+            id="suggested-reading-content"
+            class="prose max-w-none text-pr-primary"
+          >
+            <p class="text-lg leading-relaxed">
+              Loading suggested reading content...
+            </p>
+          </div>
+        </section>
+
+        <!-- Additional Resources -->
+        <section class="bg-card-bg rounded-lg p-6 shadow-custom mb-8">
+          <h3 class="text-2xl font-display font-semibold text-pr-primary mb-4">
+            Additional Resources
+          </h3>
+          <div
+            id="additional-resources"
+            class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <!-- Resources will be loaded here -->
+          </div>
+        </section>
+
+        <!-- Browse All Articles -->
+        <section class="bg-card-bg rounded-lg p-6 shadow-custom">
+          <h3 class="text-2xl font-display font-semibold text-pr-primary mb-4">
+            Browse All Articles
+          </h3>
+          <div
+            id="all-articles"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
+            <!-- All articles will be loaded here -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        // Get article slug from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleSlug = urlParams.get('article');
+
+        if (articleSlug) {
+          await loadSpecificSuggestedReading(articleSlug);
+        } else {
+          await loadGeneralSuggestedReading();
+        }
+
+        await loadAllArticles();
+      });
+
+      async function loadSpecificSuggestedReading(articleSlug) {
+        try {
+          const response = await fetch(`/api/articles/${articleSlug}`);
+          if (!response.ok) throw new Error('Article not found');
+
+          const articleData = await response.json();
+          const article = articleData.data || articleData;
+
+          // Update context
+          document.getElementById(
+            'article-context'
+          ).textContent = `Further reading related to: "${
+            article.TITLE || article.title
+          }"`;
+
+          // Update content
+          const suggestedReading =
+            article.SUGGESTED_READING || article.suggested_reading;
+          if (suggestedReading) {
+            document.getElementById('suggested-reading-content').innerHTML =
+              formatContent(suggestedReading);
+          } else {
+            document.getElementById('suggested-reading-content').innerHTML =
+              '<p class="text-pr-secondary">No suggested reading content available for this article.</p>';
+          }
+
+          // Load related resources
+          await loadRelatedResources(article);
+        } catch (error) {
+          console.error('Error loading suggested reading:', error);
+          await loadGeneralSuggestedReading();
+        }
+      }
+
+      async function loadGeneralSuggestedReading() {
+        document.getElementById('suggested-reading-content').innerHTML = `
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-display font-semibold text-pr-primary mb-3">Essential Reading</h3>
+              <p class="mb-4">Welcome to our curated collection of essential reading materials. Here you'll find in-depth analysis, background context, and additional perspectives on the stories that shape our world.</p>
+            </div>
+            
+            <div>
+              <h4 class="text-lg font-semibold text-pr-primary mb-2">How to Use This Section</h4>
+              <ul class="list-disc list-inside space-y-2 text-pr-primary">
+                <li>Navigate here from any article to find related reading materials</li>
+                <li>Explore our transparency reports to understand our methodology</li>
+                <li>Check our special reports for exclusive in-depth coverage</li>
+                <li>Browse all articles below to discover new topics</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="text-lg font-semibold text-pr-primary mb-2">Our Commitment to Quality</h4>
+              <p>Every piece of suggested reading is carefully selected to provide you with:</p>
+              <ul class="list-disc list-inside space-y-1 mt-2 text-pr-primary">
+                <li>Verified, credible sources</li>
+                <li>Multiple perspectives on complex issues</li>
+                <li>Historical context and background information</li>
+                <li>Expert analysis and commentary</li>
+              </ul>
+            </div>
+          </div>
+        `;
+
+        // Load general resources
+        await loadGeneralResources();
+      }
+
+      async function loadRelatedResources(article) {
+        try {
+          const response = await fetch('/api/articles');
+          if (!response.ok) return;
+
+          const articles = await response.json();
+          const allArticles = Array.isArray(articles)
+            ? articles
+            : articles.data || [];
+
+          // Find related articles by category and tags
+          const category = article.CATEGORY || article.category;
+          const tags = (article.TAGS || article.tags || '')
+            .split(',')
+            .map((t) => t.trim().toLowerCase());
+
+          const related = allArticles
+            .filter((a) => {
+              const aCategory = a.CATEGORY || a.category;
+              const aTags = (a.TAGS || a.tags || '')
+                .split(',')
+                .map((t) => t.trim().toLowerCase());
+              const slug = a.SLUG || a.slug;
+
+              return (
+                slug !== (article.SLUG || article.slug) &&
+                (aCategory === category ||
+                  tags.some((tag) => aTags.includes(tag)))
+              );
+            })
+            .slice(0, 4);
+
+          displayResources(related, 'Related Articles');
+        } catch (error) {
+          console.error('Error loading related resources:', error);
+          await loadGeneralResources();
+        }
+      }
+
+      async function loadGeneralResources() {
+        try {
+          const response = await fetch('/api/articles');
+          if (!response.ok) return;
+
+          const articles = await response.json();
+          const allArticles = Array.isArray(articles)
+            ? articles
+            : articles.data || [];
+
+          // Get featured articles or recent articles
+          const featured = allArticles
+            .filter((article) => article.FEATURED || article.featured)
+            .slice(0, 4);
+
+          displayResources(
+            featured.length > 0 ? featured : allArticles.slice(0, 4),
+            'Featured Reading'
+          );
+        } catch (error) {
+          console.error('Error loading general resources:', error);
+        }
+      }
+
+      function displayResources(articles, title) {
+        const resourcesContainer = document.getElementById(
+          'additional-resources'
+        );
+
+        if (articles.length === 0) {
+          resourcesContainer.innerHTML =
+            '<p class="text-pr-secondary col-span-2">No additional resources available.</p>';
+          return;
+        }
+
+        resourcesContainer.innerHTML = `
+          <div class="col-span-2 mb-4">
+            <h4 class="text-lg font-semibold text-pr-primary">${title}</h4>
+          </div>
+          ${articles
+            .map(
+              (article) => `
+            <article class="bg-pr-background bg-opacity-20 rounded-lg p-4 hover:bg-opacity-30 transition-colors">
+              <h5 class="font-semibold text-pr-primary mb-2">
+                <a href="article.html?slug=${
+                  article.SLUG || article.slug
+                }" class="hover:text-pr-secondary">
+                  ${article.TITLE || article.title}
+                </a>
+              </h5>
+              <p class="text-sm text-pr-secondary mb-2">
+                ${(article.SUMMARY || article.summary || '').substring(
+                  0,
+                  120
+                )}...
+              </p>
+              <div class="flex justify-between items-center text-xs text-pr-secondary">
+                <span>${
+                  article.CATEGORY || article.category || 'General'
+                }</span>
+                <a href="suggested-reading.html?article=${
+                  article.SLUG || article.slug
+                }" 
+                   class="text-pr-primary hover:text-pr-secondary">
+                  Read More →
+                </a>
+              </div>
+            </article>
+          `
+            )
+            .join('')}
+        `;
+      }
+
+      async function loadAllArticles() {
+        try {
+          const response = await fetch('/api/articles');
+          if (!response.ok) return;
+
+          const articles = await response.json();
+          const allArticles = Array.isArray(articles)
+            ? articles
+            : articles.data || [];
+
+          const articlesContainer = document.getElementById('all-articles');
+
+          if (allArticles.length === 0) {
+            articlesContainer.innerHTML =
+              '<p class="text-pr-secondary col-span-3">No articles available.</p>';
+            return;
+          }
+
+          articlesContainer.innerHTML = allArticles
+            .map(
+              (article) => `
+            <article class="bg-pr-background bg-opacity-20 rounded-lg p-4 hover:bg-opacity-30 transition-colors">
+              <h5 class="font-semibold text-pr-primary mb-2">
+                <a href="article.html?slug=${
+                  article.SLUG || article.slug
+                }" class="hover:text-pr-secondary">
+                  ${article.TITLE || article.title}
+                </a>
+              </h5>
+              <p class="text-xs text-pr-secondary mb-2">
+                ${article.CATEGORY || article.category || 'General'}
+              </p>
+              <p class="text-sm text-pr-secondary">
+                ${(article.SUMMARY || article.summary || '').substring(
+                  0,
+                  80
+                )}...
+              </p>
+            </article>
+          `
+            )
+            .join('');
+        } catch (error) {
+          console.error('Error loading all articles:', error);
+        }
+      }
+
+      function formatContent(content) {
+        // Simple markdown-like formatting
+        return content
+          .replace(/\n\n/g, '</p><p class="mb-4">')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/^/, '<p class="mb-4">')
+          .replace(/$/, '</p>');
+      }
+    </script>
+  </body>
+</html>

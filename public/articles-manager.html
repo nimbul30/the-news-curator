@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Articles Manager - The News Curator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/css/main.css" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pr-background': '#6b7d91',
+              'pr-nav': '#d8d3c4',
+              'pr-primary': '#182a38',
+              'pr-secondary': '#757d7f',
+              'pr-text-accent': '#eae7db',
+              'card-bg': '#eae7db',
+            },
+            fontFamily: {
+              display: ['Playfair Display', 'serif'],
+              body: ['Roboto', 'sans-serif'],
+            },
+            boxShadow: {
+              custom:
+                '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .article-card {
+        transition: all 0.3s ease;
+      }
+      .article-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .status-badge {
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-weight: bold;
+      }
+      .status-published {
+        background: #10b981;
+        color: white;
+      }
+      .status-draft {
+        background: #f59e0b;
+        color: white;
+      }
+      .position-badge {
+        font-size: 0.7rem;
+        padding: 1px 6px;
+        border-radius: 8px;
+        font-weight: bold;
+        background: #3b82f6;
+        color: white;
+      }
+      .loading-spinner {
+        border: 3px solid #f3f4f6;
+        border-top: 3px solid #3b82f6;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .modal {
+        backdrop-filter: blur(4px);
+      }
+    </style>
+  </head>
+  <body class="bg-pr-background">
+    <!-- Navigation Header -->
+    <header
+      class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-pr-primary/20 px-6 md:px-10 lg:px-20 py-4 bg-pr-primary text-pr-text-accent"
+    >
+      <!-- Logo and Tagline -->
+      <div class="flex items-center gap-3 text-white">
+        <img
+          src="assets/logo.png"
+          alt="The News Curator Logo"
+          class="h-10 w-10"
+        />
+        <div>
+          <h2
+            class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
+          >
+            The News Curator
+          </h2>
+          <p class="text-pr-text-accent text-xs font-medium">
+            Articles Manager
+          </p>
+        </div>
+      </div>
+
+      <!-- Centered Navigation -->
+      <nav class="hidden md:flex items-center justify-center gap-6 flex-1">
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="index.html"
+          >🏠 Home</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="world.html"
+          >🌍 World</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="technology.html"
+          >💻 Technology</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="business.html"
+          >💼 Business</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="economy.html"
+          >💰 Economy</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="environment.html"
+          >🌱 Environment</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="education.html"
+          >🎓 Education</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="law-crime.html"
+          >⚖️ Law & Crime</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="science.html"
+          >🔬 Science</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="politics.html"
+          >🏛️ Politics</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="primary-sources.html"
+          >📎 Primary Sources</a
+        >
+      </nav>
+
+      <!-- Admin Tools -->
+      <div class="flex items-center gap-3"></div>
+    </header>
+
+    <div class="container mx-auto p-8">
+      <!-- Header -->
+      <div
+        class="max-w-6xl mx-auto bg-card-bg p-8 rounded-lg shadow-custom mb-6"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <div>
+            <h1 class="text-3xl font-display font-bold text-pr-primary mb-2">
+              📚 Articles Manager
+            </h1>
+            <p class="text-pr-secondary">
+              View, edit, and manage all your saved articles
+            </p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div id="article-count" class="text-sm text-pr-secondary">
+              Loading...
+            </div>
+            <button
+              id="refresh-btn"
+              class="bg-pr-primary text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors"
+            >
+              🔄 Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div
+          id="stats-cards"
+          class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6"
+        >
+          <!-- Stats will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Filters and Search -->
+      <div
+        class="max-w-6xl mx-auto bg-card-bg p-6 rounded-lg shadow-custom mb-6"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-pr-primary mb-2"
+              >Search Articles</label
+            >
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search by title, content, or slug..."
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pr-primary"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-pr-primary mb-2"
+              >Category</label
+            >
+            <select
+              id="category-filter"
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pr-primary"
+            >
+              <option value="">All Categories</option>
+              <option value="General">General</option>
+              <option value="World">World</option>
+              <option value="Technology">Technology</option>
+              <option value="Business">Business</option>
+              <option value="Economy">Economy</option>
+              <option value="Environment">Environment</option>
+              <option value="Education">Education</option>
+              <option value="Law & Crime">Law & Crime</option>
+              <option value="Science">Science</option>
+              <option value="Politics">Politics</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-pr-primary mb-2"
+              >Status</label
+            >
+            <select
+              id="status-filter"
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pr-primary"
+            >
+              <option value="">All Status</option>
+              <option value="true">Published</option>
+              <option value="false">Draft</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-pr-primary mb-2"
+              >Sort By</label
+            >
+            <select
+              id="sort-filter"
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pr-primary"
+            >
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="title">Title A-Z</option>
+              <option value="category">Category</option>
+              <option value="position">Position</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="max-w-6xl mx-auto">
+        <!-- Loading State -->
+        <div
+          id="loading-state"
+          class="bg-card-bg p-8 rounded-lg shadow-custom text-center"
+        >
+          <div class="loading-spinner mx-auto mb-4"></div>
+          <p class="text-pr-secondary">Loading articles...</p>
+        </div>
+
+        <!-- Articles Container -->
+        <div id="articles-container" class="hidden">
+          <div
+            id="articles-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <!-- Articles will be loaded here -->
+          </div>
+
+          <!-- Pagination -->
+          <div id="pagination" class="mt-8 flex justify-center">
+            <!-- Pagination will be loaded here -->
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div
+          id="empty-state"
+          class="hidden bg-card-bg p-8 rounded-lg shadow-custom text-center"
+        >
+          <div class="text-6xl mb-4">📝</div>
+          <h3 class="text-xl font-bold text-pr-primary mb-2">
+            No Articles Found
+          </h3>
+          <p class="text-pr-secondary mb-4">
+            You haven't created any articles yet, or no articles match your
+            current filters.
+          </p>
+          <a
+            href="create.html"
+            class="bg-pr-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition-colors"
+          >
+            ✏️ Create Your First Article
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Preview Modal -->
+    <div
+      id="article-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4 modal"
+    >
+      <div class="bg-white rounded-lg max-w-4xl max-h-full overflow-auto">
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 id="modal-title" class="text-xl font-bold"></h3>
+            <button
+              id="close-modal"
+              class="text-gray-500 hover:text-gray-700 text-2xl"
+            >
+              &times;
+            </button>
+          </div>
+          <div id="modal-content" class="space-y-4">
+            <!-- Article details will be populated here -->
+          </div>
+          <div class="mt-6 flex gap-3 flex-wrap">
+            <button
+              id="view-transparency-btn"
+              class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
+            >
+              🔍 View Transparency
+            </button>
+            <button
+              id="edit-article-btn"
+              class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            >
+              ✏️ Edit Article
+            </button>
+            <button
+              id="delete-article-btn"
+              class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+            >
+              🗑️ Delete Article
+            </button>
+            <button
+              id="copy-slug-btn"
+              class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700"
+            >
+              📋 Copy Slug
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/articles-manager.js"></script>
+  </body>
+</html>

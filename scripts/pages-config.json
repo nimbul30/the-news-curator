@@ -1,0 +1,22 @@
+{
+  "pages": [
+    {
+      "filename": "contact",
+      "title": "Contact Us",
+      "layout": "single",
+      "content": "<div class=\"text-center mb-12\"><h1 class=\"font-display text-4xl md:text-5xl font-bold text-accent dark:text-gray-100 mb-6\">Contact Us</h1><p class=\"text-xl text-text-primary/80 dark:text-gray-300 leading-relaxed\">Get in touch with our editorial team</p></div><section class=\"mb-12\"><div class=\"grid md:grid-cols-2 gap-8\"><div class=\"bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20\"><h3 class=\"font-display text-lg font-bold text-accent dark:text-gray-200 mb-3\">Editorial Team</h3><p class=\"text-text-primary/90 dark:text-gray-300 mb-4\">For story tips, press releases, or editorial inquiries.</p><p class=\"text-primary font-semibold\">editorial@newscurator.com</p></div><div class=\"bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20\"><h3 class=\"font-display text-lg font-bold text-accent dark:text-gray-200 mb-3\">Technical Support</h3><p class=\"text-text-primary/90 dark:text-gray-300 mb-4\">For website issues or technical problems.</p><p class=\"text-primary font-semibold\">support@newscurator.com</p></div></div></section>"
+    },
+    {
+      "filename": "privacy",
+      "title": "Privacy Policy",
+      "layout": "single",
+      "content": "<div class=\"text-center mb-12\"><h1 class=\"font-display text-4xl md:text-5xl font-bold text-accent dark:text-gray-100 mb-6\">Privacy Policy</h1><p class=\"text-sm text-text-secondary\">Last updated: November 2024</p></div><div class=\"body-text text-text-primary dark:text-gray-300\"><h2 class=\"font-display text-2xl font-bold text-accent dark:text-gray-100 mb-6\">Information We Collect</h2><p>We collect information you provide directly to us, such as when you create an account, subscribe to our newsletter, or contact us.</p><h2 class=\"font-display text-2xl font-bold text-accent dark:text-gray-100 mb-6\">How We Use Your Information</h2><p>We use the information we collect to provide, maintain, and improve our services, send you newsletters and updates, and respond to your comments and questions.</p><h2 class=\"font-display text-2xl font-bold text-accent dark:text-gray-100 mb-6\">Information Sharing</h2><p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.</p></div>"
+    },
+    {
+      "filename": "categories",
+      "title": "News Categories",
+      "layout": "two-column",
+      "content": "<div class=\"mb-8\"><h1 class=\"font-display text-4xl font-bold text-accent dark:text-gray-100 mb-6\">News Categories</h1><p class=\"text-xl text-text-primary/80 dark:text-gray-300\">Explore our comprehensive coverage across all major topics</p></div><div class=\"grid md:grid-cols-2 gap-6\"><a href=\"/\" class=\"group bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20 hover:border-primary/50 transition-colors\"><h3 class=\"font-display text-lg font-bold text-accent dark:text-gray-200 mb-3 group-hover:text-primary\">World News</h3><p class=\"text-text-primary/90 dark:text-gray-300\">Global events, international relations, and breaking news from around the world.</p></a><a href=\"/\" class=\"group bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20 hover:border-primary/50 transition-colors\"><h3 class=\"font-display text-lg font-bold text-accent dark:text-gray-200 mb-3 group-hover:text-primary\">Technology</h3><p class=\"text-text-primary/90 dark:text-gray-300\">Latest tech innovations, AI developments, and digital transformation stories.</p></a><a href=\"/\" class=\"group bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20 hover:border-primary/50 transition-colors\"><h3 class=\"font-display text-lg font-bold text-accent dark:text-gray-200 mb-3 group-hover:text-primary\">Business</h3><p class=\"text-text-primary/90 dark:text-gray-300\">Market analysis, corporate news, and economic insights.</p></a><a href=\"/\" class=\"group bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20 hover:border-primary/50 transition-colors\"><h3 class=\"font-display text-lg font-bold text-accent dark:text-gray-200 mb-3 group-hover:text-primary\">Science</h3><p class=\"text-text-primary/90 dark:text-gray-300\">Scientific discoveries, research breakthroughs, and environmental news.</p></a></div>"
+    }
+  ]
+}

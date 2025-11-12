@@ -1,0 +1,9 @@
+We need a transparacy-page that have the following organized and formated
+  1. Summary
+  2. Primary Source
+  3. Basic source list
+  4. Rated Sources
+  5  Special Education Reports
+  6. Special reports (Epstien Files_) 
+  7. Bias Analysis
+  8. Claim to source mapping

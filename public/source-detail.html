@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Source Detail - The News Curator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&amp;family=Inter:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3e84b6',
+              'background-light': '#f6f7f8',
+              'background-dark': '#121a20',
+              'slate-blue': '#313e52',
+              'steel-blue': '#496a8a',
+              'heather-gray': '#a2b1b3',
+            },
+            fontFamily: {
+              display: ['Lora', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .article-card {
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+      }
+      .article-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        border-color: #3e84b6;
+      }
+      .loading-spinner {
+        border: 3px solid #f3f4f6;
+        border-top: 3px solid #3e84b6;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .category-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: #3e84b6;
+        color: white;
+      }
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      /* Responsive article cards */
+      @media (max-width: 640px) {
+        .article-card {
+          padding: 1rem;
+        }
+        .article-card h3 {
+          font-size: 1.25rem;
+        }
+      }
+      /* Button hover effects */
+      .article-card a {
+        transition: all 0.2s ease;
+      }
+      .article-card a:hover {
+        transform: scale(1.02);
+      }
+      .article-card a:active {
+        transform: scale(0.98);
+      }
+    </style>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark font-sans">
+    <!-- TopNavBar - Sticky -->
+    <header
+      class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-blue/20 dark:border-steel-blue/30 px-6 md:px-10 lg:px-20 py-4 bg-slate-blue text-heather-gray"
+    ></header>
+  </body>
+</html>
+      <!-- Logo and Tagline -->
+      <div class="flex items-center gap-3 text-white">
+        <img
+          src="assets/logo.png"
+          alt="The News Curator Logo"
+          class="h-10 w-10"
+        />
+        <div>
+          <h2
+            class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
+          >
+            The News Curator
+          </h2>
+          <p class="text-heather-gray text-xs font-medium">
+            Curating the news that matters
+          </p>
+        </div>
+      </div>
+
+      <!-- Centered Navigation -->
+      <nav class="hidden md:flex items-center justify-center gap-8 flex-1">
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="index.html"
+          >Home</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="world.html"
+          >World</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="technology.html"
+          >Technology</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="business.html"
+          >Business</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="economy.html"
+          >Economy</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="environment.html"
+          >Environment</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="education.html"
+          >Education</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="law-crime.html"
+          >Law & Crime</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="science.html"
+          >Science</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="politics.html"
+          >Politics</a
+        >
+        <a
+          class="text-base font-medium leading-normal text-white"
+          href="primary-sources.html"
+          >Primary Sources</a
+        >
+      </nav>
+
+      <!-- Search Bar -->
+      <div class="flex items-center">
+        <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+          <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+            <div
+              class="text-heather-gray flex border-none bg-steel-blue/50 items-center justify-center pl-3 rounded-l-lg border-r-0"
+            >
+              <span class="material-symbols-outlined">search</span>
+            </div>
+            <input
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-steel-blue/50 focus:border-none h-full placeholder:text-heather-gray px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+              placeholder="Search"
+              value=""
+            />
+          </div>
+        </label>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex flex-1 justify-center py-5">
+      <div class="layout-content-container flex flex-col w-full max-w-6xl px-4">
+        <!-- Breadcrumb Navigation -->
+        <section class="py-4">
+          <nav class="flex items-center gap-2 text-sm text-steel-blue dark:text-heather-gray">
+            <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+            <span>/</span>
+            <a href="primary-sources.html" class="hover:text-primary transition-colors">Primary Sources</a>
+            <span>/</span>
+            <span class="text-slate-blue dark:text-white font-medium">Source Detail</span>
+          </nav>
+        </section>
+
+        <!-- Source Header -->
+        <section class="py-6">
+          <div class="bg-white dark:bg-slate-blue rounded-lg shadow-md p-8 mb-6">
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <div class="flex-1">
+                <h1
+                  id="source-name"
+                  class="font-display text-slate-blue dark:text-white text-3xl md:text-4xl font-bold leading-tight tracking-[-0.015em] mb-2"
+                >
+                  Loading source...
+                </h1>
+                <p id="source-url" class="text-steel-blue dark:text-heather-gray text-sm break-all mb-4">
+                </p>
+              </div>
+              <a
+                href="primary-sources.html"
+                class="flex items-center gap-2 px-4 py-2 bg-steel-blue/20 hover:bg-steel-blue/30 text-slate-blue dark:text-white rounded-lg transition-colors"
+              >
+                <span class="material-symbols-outlined text-xl">arrow_back</span>
+                <span class="hidden sm:inline">Back to Index</span>
+              </a>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">article</span>
+                <span id="article-count" class="text-2xl font-bold text-slate-blue dark:text-white">0</span>
+                <span class="text-steel-blue dark:text-heather-gray">articles</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Loading State -->
+        <section id="loading-state" class="py-8 text-center">
+          <div class="flex flex-col items-center justify-center">
+            <div class="loading-spinner mb-4"></div>
+            <p class="text-steel-blue dark:text-heather-gray text-lg">
+              Loading articles...
+            </p>
+          </div>
+        </section>
+
+        <!-- Empty State -->
+        <section id="empty-state" class="py-8 text-center hidden">
+          <div class="bg-white dark:bg-slate-blue rounded-lg shadow-md p-12">
+            <span class="material-symbols-outlined text-6xl text-heather-gray mb-4">
+              article_off
+            </span>
+            <h2 class="font-display text-slate-blue dark:text-white text-2xl font-bold mb-2">
+              No Articles Found
+            </h2>
+            <p class="text-steel-blue dark:text-heather-gray mb-4">
+              This source doesn't have any published articles yet.
+            </p>
+            <a
+              href="primary-sources.html"
+              class="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              Browse All Sources
+            </a>
+          </div>
+        </section>
+
+        <!-- Articles List -->
+        <section id="articles-container" class="py-4 hidden">
+          <div id="articles-list" class="space-y-6">
+            <!-- Article cards will be inserted here -->
+          </div>
+        </section>
+
+        <!-- Pagination Controls -->
+        <section id="pagination-container" class="py-8 hidden">
+          <div class="flex items-center justify-center gap-4">
+            <button
+              id="prev-page"
+              class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-blue text-slate-blue dark:text-white rounded-lg hover:bg-steel-blue/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled
+            >
+              <span class="material-symbols-outlined">chevron_left</span>
+              <span>Previous</span>
+            </button>
+            <div class="flex items-center gap-2">
+              <span class="text-steel-blue dark:text-heather-gray">Page</span>
+              <span id="current-page" class="text-slate-blue dark:text-white font-bold">1</span>
+              <span class="text-steel-blue dark:text-heather-gray">of</span>
+              <span id="total-pages" class="text-slate-blue dark:text-white font-bold">1</span>
+            </div>
+            <button
+              id="next-page"
+              class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-blue text-slate-blue dark:text-white rounded-lg hover:bg-steel-blue/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled
+            >
+              <span>Next</span>
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-blue text-heather-gray">
+      <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex items-center gap-3 text-white mb-4">
+              <div class="size-6 text-primary">
+                <svg
+                  fill="none"
+                  viewbox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+              <h2
+                class="font-display text-white text-xl font-bold leading-tight"
+              >
+                The News Curator
+              </h2>
+            </div>
+            <p class="text-sm">Your trusted source for verified news</p>
+          </div>
+          <div>
+            <h3
+              class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+            >
+              Sections
+            </h3>
+            <nav class="flex flex-col space-y-2">
+              <a class="hover:text-white transition-colors" href="world.html">World</a>
+              <a class="hover:text-white transition-colors" href="technology.html"
+                >Technology</a
+              >
+              <a class="hover:text-white transition-colors" href="business.html"
+                >Business</a
+              >
+              <a class="hover:text-white transition-colors" href="politics.html"
+                >Politics</a
+              >
+              <a class="hover:text-white transition-colors" href="economy.html">Economy</a>
+              <a class="hover:text-white transition-colors" href="environment.html"
+                >Environment</a
+              >
+              <a class="hover:text-white transition-colors" href="education.html"
+                >Education</a
+              >
+              <a class="hover:text-white transition-colors" href="law-crime.html"
+                >Law & Crime</a
+              >
+              <a class="hover:text-white transition-colors" href="science.html">Science</a>
+            </nav>
+          </div>
+          <div>
+            <h3
+              class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+            >
+              About
+            </h3>
+            <nav class="flex flex-col space-y-2">
+              <a class="hover:text-white transition-colors" href="transparency.html"
+                >Transparency</a
+              >
+              <a class="hover:text-white transition-colors" href="ai-policy.html"
+                >AI Policy</a
+              >
+              <a class="hover:text-white transition-colors" href="contact.html">Contact</a>
+              <a class="hover:text-white transition-colors" href="privacy.html"
+                >Privacy Policy</a
+              >
+            </nav>
+          </div>
+          <div>
+            <h3
+              class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+            >
+              Follow Us
+            </h3>
+            <div class="flex space-x-4">
+              <a class="hover:text-white transition-colors" href="#">
+                <svg
+                  aria-hidden="true"
+                  class="h-6 w-6"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                    fill-rule="evenodd"
+                  ></path>
+                </svg>
+              </a>
+              <a class="hover:text-white transition-colors" href="#">
+                <svg
+                  aria-hidden="true"
+                  class="h-6 w-6"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 border-t border-steel-blue/50 pt-8 text-center text-sm"
+        >
+          <p>© 2024 The News Curator. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/primary-sources.js"></script>
+    <script>
+      // Initialize source detail page
+      if (typeof window.PrimarySourcesManager !== 'undefined') {
+        const manager = new window.PrimarySourcesManager();
+        manager.initSourceDetailPage();
+      }
+    </script>
+  </body>
+</html>

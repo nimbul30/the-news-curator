@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Policy - The News Curator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pr-background': '#6b7d91',
+              'pr-nav': '#d8d3c4',
+              'pr-primary': '#182a38',
+              'pr-secondary': '#757d7f',
+              'pr-text-accent': '#eae7db',
+              'card-bg': '#eae7db',
+            },
+            fontFamily: {
+              display: ['Playfair Display', 'serif'],
+              body: ['Roboto', 'sans-serif'],
+            },
+            boxShadow: {
+              custom:
+                '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-pr-background font-body text-pr-primary transition-colors duration-300"
+  >
+    <header class="bg-[#eae7db] shadow-md sticky top-0 z-50">
+      <nav
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center">
+          <img
+            src="/assets/The News Curator.png"
+            alt="The News Curator Logo"
+            class="h-16 w-16 mr-4"
+          />
+          <div>
+            <a
+              class="text-xl md:text-2xl font-display font-bold text-pr-text-accent"
+              href="index.html"
+              >The News Curator</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container mx-auto px-6 py-12">
+      <div class="max-w-4xl mx-auto bg-card-bg p-8 rounded-lg shadow-custom">
+        <div class="mb-6">
+          <button
+            onclick="history.back()"
+            class="inline-flex items-center px-4 py-2 bg-pr-primary text-pr-text-accent font-medium rounded-lg hover:bg-pr-secondary transition-colors duration-200"
+          >
+            <span class="material-icons mr-2">arrow_back</span>
+            Back
+          </button>
+        </div>
+        <h1
+          class="text-pr-primary font-display text-4xl font-bold mb-6 border-b border-pr-nav pb-4"
+        >
+          AI Policy and Ethics Statement
+        </h1>
+        <div class="prose max-w-none text-pr-primary">
+          <p>
+            At The News Curator, artificial intelligence, when used responsibly,
+            is a powerful tool for enhancing human journalism. Our goal is to
+            leverage AI to uncover more stories and analyze information more
+            efficiently, while holding ourselves to the highest standards of
+            journalistic integrity. Our human editors, researchers, and writers
+            have the final say on everything we publish.
+          </p>
+
+          <h2 class="font-display">
+            Our Guiding Philosophy: AI as a Tool, Not a Replacement
+          </h2>
+          <p>
+            We view AI as a "centaur," a collaborative partner that augments
+            human intelligence. AI is our research assistant, our data analyst,
+            and our copy editor. It is never our author or our final arbiter of
+            truth.
+          </p>
+
+          <h2 class="font-display">How We Use AI in Our Workflow</h2>
+          <p>
+            Our use of AI is confined to specific, verifiable tasks within our
+            Human-AI Collaborative Investigative Framework (HA-CIF):
+          </p>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Horizon Scanning & Discovery:
+          </h3>
+          <p>
+            We use AI to monitor thousands of public data sources (local
+            newspapers, government records, academic journals) to flag anomalies
+            and identify potential underreported stories. The AI suggests leads;
+            our human editors determine which ones to pursue.
+          </p>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Initial Summarization:
+          </h3>
+          <p>
+            For complex documents, we use AI to generate initial, neutral
+            summaries. This allows our researchers to quickly assess the
+            relevance of a source. These summaries are never used as final
+            content.
+          </p>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Fact-Checking Assistance:
+          </h3>
+          <p>
+            We may use AI to cross-reference specific claims against a vast
+            database of sources to speed up the verification process. Every core
+            fact is then manually verified by our human editors from primary
+            sources.
+          </p>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Language & Readability:
+          </h3>
+          <p>
+            We use AI-powered tools like Grammarly to check for grammatical
+            errors, improve clarity, and ensure a professional tone. This is the
+            final polish, not the creation of the core argument or narrative.
+          </p>
+
+          <h2 class="font-display">Our Ethical Commitments</h2>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Transparency:
+          </h3>
+          <p>
+            We will always be clear about our use of AI. This policy will be
+            linked from every article where AI was used in the research process.
+          </p>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Accountability:
+          </h3>
+          <p>
+            Our human editors are fully accountable for the accuracy, fairness,
+            and context of everything we publish. An AI model cannot be held
+            responsible; we are.
+          </p>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Human Oversight is Final:
+          </h3>
+          <p>
+            No article is published without a thorough review and final approval
+            from a human editor. AI-generated text is not used in the final
+            article, and all conclusions are drawn by our human journalists.
+          </p>
+
+          <h3 class="font-display text-lg font-semibold mt-4 mb-2">
+            Bias Mitigation:
+          </h3>
+          <p>
+            We are aware that AI models can reflect biases present in their
+            training data. Our human editors are trained to critically evaluate
+            AI-generated outputs for potential bias and to ensure our final
+            reporting is fair and balanced.
+          </p>
+
+          <p class="mt-6 font-semibold">
+            Our commitment is to you, our reader. We use these advanced tools to
+            serve our mission: to deliver meticulously researched, transparently
+            sourced, and trustworthy news.
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

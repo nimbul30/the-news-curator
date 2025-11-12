@@ -1,0 +1,25 @@
+{
+  "id": "69034f8896599174c53890dd",
+  "title": "Climate Change and Global Policy",
+  "slug": "climate-change-global-policy",
+  "excerpt": "An analysis of international efforts to combat climate change.",
+  "content": "# Climate Change and Global Policy\n\nClimate change remains one of the most pressing challenges of our time. This article examines the various international policies and agreements aimed at reducing greenhouse gas emissions and mitigating the effects of global warming.\n\n## International Agreements\n\nThe Paris Agreement and subsequent climate summits have established frameworks for global cooperation.\n\n## Policy Effectiveness\n\nRecent studies show mixed results in policy implementation across different nations.",
+  "category": "Politics",
+  "author": "John Doe",
+  "publishedAt": "2025-10-30T11:44:08.931Z",
+  "viewCount": 1,
+  "customFields": {
+    "spot_number": 2,
+    "image_url": "https://via.placeholder.com/800x600/6b7d91/eae7db?text=Climate+Policy",
+    "sources": "IPCC Reports, UN Climate Change, Environmental Policy Institute",
+    "primary_source": "IPCC Sixth Assessment Report",
+    "special_report_title": "Global Climate Action: Progress and Challenges",
+    "special_report_content": "An in-depth look at how different countries are implementing climate policies and the effectiveness of international cooperation in addressing global warming.",
+    "suggested_reading": "The IPCC reports provide comprehensive scientific assessments of climate change. For policy analysis, the Environmental Policy Institute offers detailed studies on implementation strategies.",
+    "bias_analysis": "Sources include international scientific bodies and policy research institutions. Analysis focuses on factual policy outcomes rather than political positions.",
+    "claim_source_mapping": "International cooperation frameworks - UN Climate Change\nPolicy effectiveness studies - Environmental Policy Institute\nScientific consensus on climate change - IPCC Reports",
+    "rated_sources": "IPCC Reports [Tier 1] - International scientific assessment body\nUN Climate Change [Tier 2] - Official international organization\nEnvironmental Policy Institute [Tier 2] - Research institution",
+    "is_draft": false
+  },
+  "image_url": "https://via.placeholder.com/800x600/6b7d91/eae7db?text=Climate+Policy"
+}

@@ -1,0 +1,9 @@
+{
+  "host": "ftp.thenewscurator.com",
+  "user": "deploy@thenewscurator.com",
+  "password": "Sept1977!?!Sept1977!?!",
+  "port": 21,
+  "secure": false,
+  "remoteDir": "/",
+  "localDir": "./public"
+}

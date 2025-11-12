@@ -1,0 +1,16 @@
+<svg width="150" height="50" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners -->
+  <rect width="150" height="50" rx="8" fill="#2D5A5A"/>
+  
+  <!-- Book icon -->
+  <rect x="12" y="12" width="16" height="26" rx="2" fill="none" stroke="#E53E3E" stroke-width="2"/>
+  <rect x="14" y="14" width="12" height="22" rx="1" fill="none" stroke="#E53E3E" stroke-width="1"/>
+  
+  <!-- Arrow pointing up -->
+  <line x1="20" y1="32" x2="20" y2="18" stroke="#E53E3E" stroke-width="2"/>
+  <polygon points="20,18 17,22 23,22" fill="#E53E3E"/>
+  
+  <!-- Text -->
+  <text x="38" y="22" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">THE NEWS</text>
+  <text x="38" y="36" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">CURATOR</text>
+</svg>

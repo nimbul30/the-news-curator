@@ -1,0 +1,92 @@
+{
+  "featured": [
+    {
+      "title": "The Future of Renewable Energy: A Global Perspective",
+      "slug": "future-renewable-energy-global-perspective",
+      "excerpt": "An in-depth analysis of how renewable energy technologies are reshaping the global energy landscape, with insights from leading experts and policymakers worldwide.",
+      "category": "Environment",
+      "author": "Dr. Sarah Chen",
+      "publishedAt": "2024-11-01T10:00:00Z",
+      "imageUrl": "/assets/renewable-energy-hero.jpg",
+      "spotlightReason": "Editor's Choice",
+      "priority": 10
+    },
+    {
+      "title": "Breaking: Major Breakthrough in Quantum Computing",
+      "slug": "quantum-computing-breakthrough-2024",
+      "excerpt": "Scientists at leading research institutions announce a significant advancement in quantum computing that could revolutionize data processing and cryptography.",
+      "category": "Technology",
+      "author": "Michael Rodriguez",
+      "publishedAt": "2024-10-30T14:30:00Z",
+      "imageUrl": "/assets/quantum-computer.jpg",
+      "spotlightReason": "Breaking News",
+      "priority": 9
+    },
+    {
+      "title": "Economic Recovery Patterns: Lessons from Global Markets",
+      "slug": "economic-recovery-patterns-global-markets",
+      "excerpt": "A comprehensive analysis of economic recovery strategies implemented across different regions and their effectiveness in post-pandemic recovery.",
+      "category": "Economy",
+      "author": "Prof. Elena Vasquez",
+      "publishedAt": "2024-10-28T09:15:00Z",
+      "imageUrl": "/assets/global-economy.jpg",
+      "spotlightReason": "Trending",
+      "priority": 8
+    },
+    {
+      "title": "Educational Innovation: AI in the Classroom",
+      "slug": "ai-education-classroom-innovation",
+      "excerpt": "How artificial intelligence is transforming education, from personalized learning experiences to automated assessment systems.",
+      "category": "Education",
+      "author": "Dr. James Thompson",
+      "publishedAt": "2024-10-26T16:45:00Z",
+      "imageUrl": "/assets/ai-classroom.jpg",
+      "spotlightReason": "Featured Analysis",
+      "priority": 7
+    },
+    {
+      "title": "Climate Change Adaptation: Cities Leading the Way",
+      "slug": "climate-change-adaptation-cities",
+      "excerpt": "Urban centers around the world are implementing innovative solutions to adapt to climate change, from green infrastructure to smart city technologies.",
+      "category": "Environment",
+      "author": "Maria Santos",
+      "publishedAt": "2024-10-25T11:20:00Z",
+      "imageUrl": "/assets/green-city.jpg",
+      "spotlightReason": "Impact Story",
+      "priority": 6
+    },
+    {
+      "title": "The Rise of Digital Healthcare: Telemedicine Revolution",
+      "slug": "digital-healthcare-telemedicine-revolution",
+      "excerpt": "Exploring how digital health technologies are making healthcare more accessible and efficient, with real-world case studies from around the globe.",
+      "category": "Technology",
+      "author": "Dr. Amanda Foster",
+      "publishedAt": "2024-10-24T13:00:00Z",
+      "imageUrl": "/assets/telemedicine.jpg",
+      "spotlightReason": "Health Focus",
+      "priority": 5
+    },
+    {
+      "title": "Space Exploration: New Frontiers in 2024",
+      "slug": "space-exploration-new-frontiers-2024",
+      "excerpt": "A look at the most exciting space missions and discoveries of 2024, from Mars exploration to deep space telescopes revealing new cosmic mysteries.",
+      "category": "Science",
+      "author": "Dr. Robert Kim",
+      "publishedAt": "2024-10-22T08:30:00Z",
+      "imageUrl": "/assets/space-exploration.jpg",
+      "spotlightReason": "Science Spotlight",
+      "priority": 4
+    },
+    {
+      "title": "Cybersecurity in the Age of Remote Work",
+      "slug": "cybersecurity-remote-work-age",
+      "excerpt": "As remote work becomes permanent for many organizations, cybersecurity challenges and solutions are evolving rapidly to protect distributed workforces.",
+      "category": "Technology",
+      "author": "Lisa Chang",
+      "publishedAt": "2024-10-20T15:15:00Z",
+      "imageUrl": "/assets/cybersecurity.jpg",
+      "spotlightReason": "Security Alert",
+      "priority": 3
+    }
+  ]
+}

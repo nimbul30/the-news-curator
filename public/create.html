@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Content - The News Curator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/css/main.css" rel="stylesheet" />
+    <script src="/js/verification-bridge.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pr-background': '#6b7d91',
+              'pr-nav': '#d8d3c4',
+              'pr-primary': '#182a38',
+              'pr-secondary': '#757d7f',
+              'pr-text-accent': '#eae7db',
+              'card-bg': '#eae7db',
+            },
+            fontFamily: {
+              display: ['Playfair Display', 'serif'],
+              body: ['Roboto', 'sans-serif'],
+            },
+            boxShadow: {
+              custom:
+                '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .publishing-status {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: none;
+      }
+
+      .publishing-status.success {
+        background: #10b981;
+        color: white;
+      }
+
+      .publishing-status.error {
+        background: #ef4444;
+        color: white;
+      }
+
+      .publishing-status.processing {
+        background: #3b82f6;
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="bg-pr-background">
+    <!-- Navigation Header -->
+    <header
+      class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-pr-primary/20 px-6 md:px-10 lg:px-20 py-4 bg-pr-primary text-pr-text-accent"
+    >
+      <!-- Logo and Tagline -->
+      <div class="flex items-center gap-3 text-white">
+        <img
+          src="assets/logo.png"
+          alt="The News Curator Logo"
+          class="h-10 w-10"
+        />
+        <div>
+          <h2
+            class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
+          >
+            The News Curator
+          </h2>
+          <p class="text-pr-text-accent text-xs font-medium">Article Creator</p>
+        </div>
+      </div>
+
+      <!-- Centered Navigation -->
+      <nav class="hidden md:flex items-center justify-center gap-6 flex-1">
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="index.html"
+          >🏠 Home</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="world.html"
+          >🌍 World</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="technology.html"
+          >💻 Technology</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="business.html"
+          >💼 Business</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="economy.html"
+          >💰 Economy</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="environment.html"
+          >🌱 Environment</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="education.html"
+          >🎓 Education</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="law-crime.html"
+          >⚖️ Law & Crime</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="science.html"
+          >🔬 Science</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="politics.html"
+          >🏛️ Politics</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="primary-sources.html"
+          >📎 Primary Sources</a
+        >
+      </nav>
+
+      <!-- Admin Tools -->
+      <div class="flex items-center gap-3"></div>
+    </header>
+
+    <div class="container mx-auto p-8">
+      <!-- Publishing Status Notification -->
+      <div id="publishing-status" class="publishing-status">
+        <div id="status-message">Processing...</div>
+      </div>
+
+      <!-- Main Form -->
+      <div
+        id="create-form-container"
+        class="max-w-4xl mx-auto bg-card-bg p-8 rounded-lg shadow-custom"
+      >
+        <h1 class="text-2xl font-display font-bold text-pr-primary mb-6">
+          Create & Publish Articles
+        </h1>
+
+        <form id="unified-form" class="space-y-6">
+          <!-- Position -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">Position</h3>
+            <div>
+              <label for="spot_number" class="block font-bold text-pr-primary"
+                >Position Number</label
+              >
+              <input
+                type="text"
+                id="spot_number"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="Enter position (1, 2, A, B, etc. - 1 = top of homepage)"
+              />
+              <div
+                class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-md"
+              >
+                <p class="text-sm text-blue-800 font-medium mb-1">
+                  💡 Position Guide
+                </p>
+                <p class="text-xs text-blue-600">
+                  • <strong>Positions 1-4:</strong> Featured articles (need
+                  800x600px images)<br />
+                  • <strong>Positions 5+:</strong> Regular articles (need
+                  1200x675px images)<br />
+                  • <strong>Letters (A, B, C):</strong> Special positioning or
+                  categories<br />
+                  • Lower numbers/letters appear more prominently on homepage<br />
+                  • No limit on position numbers or letters
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Media & Links -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">Media & Links</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="image_url" class="block font-bold text-pr-primary"
+                  >Main Image URL</label
+                >
+                <input
+                  type="text"
+                  id="image_url"
+                  class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                  placeholder="https://example.com/image.jpg or assets/image.jpg"
+                />
+                <p class="text-xs text-pr-secondary mt-1">
+                  Top 4 spots: 4:3 ratio, Others: 16:9 ratio
+                </p>
+              </div>
+
+              <div>
+                <label
+                  for="youtube_embed_url"
+                  class="block font-bold text-pr-primary"
+                  >YouTube Embed URL</label
+                >
+                <input
+                  type="text"
+                  id="youtube_embed_url"
+                  class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                  placeholder="https://www.youtube.com/embed/..."
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Information -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">Basic Information</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="title" class="block font-bold text-pr-primary"
+                  >Title *</label
+                >
+                <input
+                  type="text"
+                  id="title"
+                  required
+                  minlength="5"
+                  class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                  placeholder="Enter article title (minimum 5 characters)"
+                />
+              </div>
+
+              <div>
+                <label for="slug" class="block font-bold text-pr-primary"
+                  >Slug *</label
+                >
+                <input
+                  type="text"
+                  id="slug"
+                  required
+                  class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                  placeholder="url-friendly-slug"
+                />
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label for="tags" class="block font-bold text-pr-primary"
+                >Tags</label
+              >
+              <input
+                type="text"
+                id="tags"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="politics, news, breaking"
+              />
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label for="category" class="block font-bold text-pr-primary"
+                  >Category *</label
+                >
+                <select
+                  id="category"
+                  required
+                  class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                >
+                  <option value="General">General</option>
+                  <option value="World">World</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Business">Business</option>
+                  <option value="Economy">Economy</option>
+                  <option value="Environment">Environment</option>
+                  <option value="Education">Education</option>
+                  <option value="Law & Crime">Law & Crime</option>
+                  <option value="Science">Science</option>
+                  <option value="Politics">Politics</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="author" class="block font-bold text-pr-primary"
+                  >Author *</label
+                >
+                <input
+                  type="text"
+                  id="author"
+                  required
+                  value="Admin"
+                  class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                  placeholder="Author name"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">Content</h3>
+
+            <div class="mb-4">
+              <label for="summary" class="block font-bold text-pr-primary"
+                >Summary</label
+              >
+              <textarea
+                id="summary"
+                rows="3"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="Brief summary of the article..."
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="content" class="block font-bold text-pr-primary"
+                >Article Content *</label
+              >
+              <div class="text-sm text-pr-secondary mb-2">
+                <strong>Formatting Tips:</strong>
+                Use **bold**, *italic*, # Heading 1, ## Heading 2, --- for
+                breaks
+              </div>
+              <textarea
+                id="content"
+                rows="15"
+                required
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800 font-mono text-sm"
+                placeholder="Write your article content here...
+
+## Section 1: Introduction
+Your content goes here...
+
+## Section 2: Main Points
+More content here..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Sources & Verification -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">
+              Sources & Verification
+            </h3>
+
+            <div class="mb-4">
+              <label for="sources" class="block font-bold text-pr-primary"
+                >Sources</label
+              >
+              <textarea
+                id="sources"
+                rows="4"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="List your sources here, one per line..."
+              ></textarea>
+            </div>
+
+            <div>
+              <label
+                for="primary_source"
+                class="block font-bold text-pr-primary"
+                >Primary Source</label
+              >
+              <input
+                type="text"
+                id="primary_source"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="Main source for this article"
+              />
+            </div>
+          </div>
+
+          <!-- Special Report Section -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">
+              Special Report Section
+            </h3>
+
+            <div class="mb-4">
+              <label
+                for="special_report_title"
+                class="block font-bold text-pr-primary"
+                >Special Report Title</label
+              >
+              <input
+                type="text"
+                id="special_report_title"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="Title for the special report section"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="special_report_content"
+                class="block font-bold text-pr-primary"
+                >Special Report Content</label
+              >
+              <textarea
+                id="special_report_content"
+                rows="6"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="Write a few paragraphs for the special report section..."
+              ></textarea>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="special_report_video"
+                class="block font-bold text-pr-primary"
+                >YouTube Video Link</label
+              >
+              <input
+                type="text"
+                id="special_report_video"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="https://www.youtube.com/watch?v=..."
+              />
+            </div>
+
+            <div>
+              <label
+                for="special_report_quotes"
+                class="block font-bold text-pr-primary"
+                >Quotes</label
+              >
+              <textarea
+                id="special_report_quotes"
+                rows="3"
+                class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+                placeholder="Add relevant quotes here..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Suggested Reading -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">Suggested Reading</h3>
+            <p class="text-sm text-pr-secondary mb-3">
+              Write 4-12 paragraphs of suggested reading content
+            </p>
+
+            <textarea
+              id="suggested_reading"
+              rows="8"
+              class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+              placeholder="Write your suggested reading content here. Include 4-12 paragraphs with recommendations, related articles, and additional context for readers who want to dive deeper into the topic..."
+            ></textarea>
+          </div>
+
+          <!-- Bias Analysis -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">Bias Analysis</h3>
+
+            <textarea
+              id="bias_analysis"
+              rows="6"
+              class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+              placeholder="Provide your bias analysis here. Discuss potential biases in sources, methodology, or presentation. Include multiple paragraphs analyzing different aspects of bias..."
+            ></textarea>
+          </div>
+
+          <!-- Claim-to-Source Mapping -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">
+              Claim-to-Source Mapping
+            </h3>
+
+            <textarea
+              id="claim_source_mapping"
+              rows="6"
+              class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+              placeholder="Map specific claims to their sources here. Write multiple paragraphs detailing which sources support which claims, providing transparency about the evidence behind each assertion..."
+            ></textarea>
+          </div>
+
+          <!-- Rated Sources -->
+          <div class="bg-pr-primary bg-opacity-10 p-4 rounded-lg">
+            <h3 class="font-bold text-pr-primary mb-4">Rated Sources</h3>
+
+            <textarea
+              id="rated_sources"
+              rows="8"
+              class="w-full mt-1 px-4 py-2 rounded-md text-gray-800"
+              placeholder="Provide detailed ratings and analysis of your sources here. Include multiple paragraphs evaluating the credibility, reliability, and quality of each source used in the article..."
+            ></textarea>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-4 pt-6">
+            <button
+              type="submit"
+              id="submit-btn"
+              class="flex-1 min-w-[200px] bg-pr-primary text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition-colors"
+            >
+              Publish Article
+            </button>
+
+            <button
+              type="button"
+              id="edit-btn"
+              class="flex-1 min-w-[150px] bg-blue-600 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Edit Existing
+            </button>
+
+            <button
+              type="button"
+              id="delete-btn"
+              class="flex-1 min-w-[150px] bg-red-700 text-white font-bold py-3 px-6 rounded-md hover:bg-red-800 transition-colors"
+            >
+              Delete Article
+            </button>
+
+            <button
+              type="button"
+              id="reset-btn"
+              class="min-w-[150px] bg-gray-600 text-white font-bold py-3 px-6 rounded-md hover:bg-gray-700 transition-colors"
+            >
+              Reset Form
+            </button>
+          </div>
+        </form>
+
+        <p id="feedback-message" class="mt-4 text-center font-bold"></p>
+      </div>
+    </div>
+
+    <script>
+      let isEditMode = false;
+      let originalSlug = null;
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const unifiedForm = document.getElementById('unified-form');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const deleteBtn = document.getElementById('delete-btn');
+        const editBtn = document.getElementById('edit-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const publishingStatus = document.getElementById('publishing-status');
+        const statusMessage = document.getElementById('status-message');
+
+        // Auto-generate slug from title
+        document.getElementById('title').addEventListener('input', (e) => {
+          const slug = e.target.value
+            .toLowerCase()
+            .replace(/[^a-z0-9\\s-]/g, '')
+            .replace(/\\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim();
+          document.getElementById('slug').value = slug;
+        });
+
+        // Show publishing status
+        function showStatus(message, type = 'processing') {
+          statusMessage.textContent = message;
+          publishingStatus.className = `publishing-status ${type}`;
+          publishingStatus.style.display = 'block';
+
+          if (type === 'success' || type === 'error') {
+            setTimeout(() => {
+              publishingStatus.style.display = 'none';
+            }, 5000);
+          }
+        }
+
+        // MongoDB Save Function
+        async function saveToMongoDB(articleData) {
+          try {
+            showStatus('Saving article to database...', 'processing');
+
+            const url = isEditMode
+              ? `/api/articles/${originalSlug}`
+              : '/api/articles';
+            const method = isEditMode ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+              method: method,
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(articleData),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              throw new Error(
+                result.error || `Save failed: ${response.status}`
+              );
+            }
+
+            showStatus('Article saved successfully!', 'success');
+            return result;
+          } catch (error) {
+            console.error('MongoDB Save error:', error);
+            showStatus(`Save failed: ${error.message}`, 'error');
+            throw error;
+          }
+        }
+
+        // Form submission
+        unifiedForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          // Client-side validation
+          const title = document.getElementById('title').value.trim();
+          const slug = document.getElementById('slug').value.trim();
+
+          if (title.length < 5) {
+            alert('Title must be at least 5 characters long');
+            return;
+          }
+
+          if (slug.length < 3) {
+            alert('Slug must be at least 3 characters long');
+            return;
+          }
+
+          const articleData = {
+            title: title,
+            slug: slug,
+            category: document.getElementById('category').value,
+            author: document.getElementById('author').value,
+            spot_number:
+              document.getElementById('spot_number').value.trim() || null,
+            tags: document.getElementById('tags').value,
+            image_url: document.getElementById('image_url').value,
+            youtube_embed_url:
+              document.getElementById('youtube_embed_url').value,
+            excerpt: document.getElementById('summary').value,
+            content: document.getElementById('content').value,
+            sources: document.getElementById('sources').value,
+            primary_source: document.getElementById('primary_source').value,
+            special_report_title: document.getElementById(
+              'special_report_title'
+            ).value,
+            special_report_content: document.getElementById(
+              'special_report_content'
+            ).value,
+            special_report_video: document.getElementById(
+              'special_report_video'
+            ).value,
+            special_report_quotes: document.getElementById(
+              'special_report_quotes'
+            ).value,
+            suggested_reading:
+              document.getElementById('suggested_reading').value,
+            bias_analysis: document.getElementById('bias_analysis').value,
+            claim_source_mapping: document.getElementById(
+              'claim_source_mapping'
+            ).value,
+            rated_sources: document.getElementById('rated_sources').value,
+            published: true,
+            publishedAt: new Date().toISOString(),
+          };
+
+          try {
+            // Save to MongoDB
+            await saveToMongoDB(articleData);
+
+            feedbackMessage.textContent = isEditMode
+              ? 'Article updated and saved successfully!'
+              : 'Article created and saved successfully!';
+            feedbackMessage.style.color = 'green';
+
+            if (isEditMode) {
+              resetEditMode();
+            } else {
+              unifiedForm.reset();
+            }
+          } catch (error) {
+            feedbackMessage.textContent = `Error: ${error.message}`;
+            feedbackMessage.style.color = 'red';
+          }
+        });
+
+        // Edit functionality
+        editBtn.addEventListener('click', async () => {
+          const slugToEdit = document.getElementById('slug').value;
+          if (!slugToEdit) {
+            alert('Please enter the slug of the article you wish to edit.');
+            return;
+          }
+
+          try {
+            const response = await fetch(`/api/articles/${slugToEdit}`);
+            if (!response.ok) {
+              throw new Error('Article not found');
+            }
+
+            const result = await response.json();
+            const article = result.article;
+
+            // Populate form with existing data
+            document.getElementById('title').value = article.title || '';
+            document.getElementById('slug').value = article.slug || '';
+            document.getElementById('spot_number').value =
+              article.spot_number || '';
+            document.getElementById('tags').value = article.tags || '';
+            document.getElementById('image_url').value =
+              article.image_url || '';
+            document.getElementById('youtube_embed_url').value =
+              article.youtube_embed_url || '';
+            document.getElementById('summary').value = article.excerpt || '';
+            document.getElementById('content').value = article.content || '';
+            document.getElementById('sources').value = article.sources || '';
+            document.getElementById('primary_source').value =
+              article.primary_source || '';
+            document.getElementById('special_report_title').value =
+              article.special_report_title || '';
+            document.getElementById('special_report_content').value =
+              article.special_report_content || '';
+            document.getElementById('special_report_video').value =
+              article.special_report_video || '';
+            document.getElementById('special_report_quotes').value =
+              article.special_report_quotes || '';
+            document.getElementById('suggested_reading').value =
+              article.suggested_reading || '';
+            document.getElementById('bias_analysis').value =
+              article.bias_analysis || '';
+            document.getElementById('claim_source_mapping').value =
+              article.claim_source_mapping || '';
+            document.getElementById('rated_sources').value =
+              article.rated_sources || '';
+
+            // Set category
+            if (article.category) {
+              document.getElementById('category').value = article.category;
+            }
+
+            // Set author
+            if (article.author) {
+              document.getElementById('author').value = article.author;
+            }
+
+            // Set edit mode
+            originalSlug = slugToEdit;
+            isEditMode = true;
+            submitBtn.textContent = 'Update & Publish';
+            feedbackMessage.textContent = 'Article loaded for editing';
+            feedbackMessage.style.color = 'blue';
+          } catch (error) {
+            feedbackMessage.textContent = `Error: ${error.message}`;
+            feedbackMessage.style.color = 'red';
+          }
+        });
+
+        // Delete functionality
+        deleteBtn.addEventListener('click', async () => {
+          const slugToDelete = document.getElementById('slug').value;
+          if (!slugToDelete) {
+            alert('Please enter the slug of the article you wish to delete.');
+            return;
+          }
+
+          const isConfirmed = confirm(
+            `Are you sure you want to delete "${slugToDelete}"?`
+          );
+          if (isConfirmed) {
+            try {
+              showStatus('Deleting article...', 'processing');
+
+              const response = await fetch(`/api/articles/${slugToDelete}`, {
+                method: 'DELETE',
+              });
+
+              if (!response.ok) {
+                throw new Error(`Delete failed: ${response.status}`);
+              }
+
+              showStatus('Article deleted successfully!', 'success');
+              feedbackMessage.textContent = 'Article deleted successfully!';
+              feedbackMessage.style.color = 'green';
+              unifiedForm.reset();
+              resetEditMode();
+            } catch (error) {
+              showStatus(`Delete failed: ${error.message}`, 'error');
+              feedbackMessage.textContent = `Error: ${error.message}`;
+              feedbackMessage.style.color = 'red';
+            }
+          }
+        });
+
+        // Reset functionality
+        resetBtn.addEventListener('click', () => {
+          if (
+            confirm(
+              'Are you sure you want to reset the form? All unsaved changes will be lost.'
+            )
+          ) {
+            unifiedForm.reset();
+            resetEditMode();
+            feedbackMessage.textContent = '';
+          }
+        });
+
+        function resetEditMode() {
+          isEditMode = false;
+          originalSlug = null;
+          submitBtn.textContent = 'Publish Article';
+        }
+
+        // Check for edit parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const editSlug = urlParams.get('edit');
+
+        if (editSlug) {
+          // Auto-load article for editing
+          setTimeout(async () => {
+            try {
+              const response = await fetch(`/api/articles/${editSlug}`);
+              if (response.ok) {
+                const result = await response.json();
+                const article = result.article;
+
+                // Populate form with existing data
+                document.getElementById('title').value = article.title || '';
+                document.getElementById('slug').value = article.slug || '';
+                document.getElementById('spot_number').value =
+                  article.spot_number || '';
+                document.getElementById('tags').value = article.tags || '';
+                document.getElementById('image_url').value =
+                  article.image_url || '';
+                document.getElementById('youtube_embed_url').value =
+                  article.youtube_embed_url || '';
+                document.getElementById('summary').value =
+                  article.excerpt || '';
+                document.getElementById('content').value =
+                  article.content || '';
+                document.getElementById('sources').value =
+                  article.sources || '';
+                document.getElementById('primary_source').value =
+                  article.primary_source || '';
+                document.getElementById('special_report_title').value =
+                  article.special_report_title || '';
+                document.getElementById('special_report_content').value =
+                  article.special_report_content || '';
+                document.getElementById('special_report_video').value =
+                  article.special_report_video || '';
+                document.getElementById('special_report_quotes').value =
+                  article.special_report_quotes || '';
+                document.getElementById('suggested_reading').value =
+                  article.suggested_reading || '';
+                document.getElementById('bias_analysis').value =
+                  article.bias_analysis || '';
+                document.getElementById('claim_source_mapping').value =
+                  article.claim_source_mapping || '';
+                document.getElementById('rated_sources').value =
+                  article.rated_sources || '';
+
+                // Set category and author
+                if (article.category)
+                  document.getElementById('category').value = article.category;
+                if (article.author)
+                  document.getElementById('author').value = article.author;
+
+                // Set edit mode
+                originalSlug = editSlug;
+                isEditMode = true;
+                submitBtn.textContent = 'Update & Save';
+                feedbackMessage.innerHTML = `
+                  <div style="color: blue;">
+                    <strong>📝 Article Loaded for Editing</strong><br>
+                    Article "${article.title}" has been loaded. Make your changes and click "Update & Save".
+                  </div>
+                `;
+              } else {
+                feedbackMessage.innerHTML = `
+                  <div style="color: red;">
+                    <strong>❌ Article Not Found</strong><br>
+                    Could not find article with slug "${editSlug}".
+                  </div>
+                `;
+              }
+            } catch (error) {
+              feedbackMessage.innerHTML = `
+                <div style="color: red;">
+                  <strong>❌ Error Loading Article</strong><br>
+                  ${error.message}
+                </div>
+              `;
+            }
+          }, 500);
+        }
+        // Auto-populate from verification bridge if coming from verifier
+        else if (
+          window.verificationBridge &&
+          window.verificationBridge.isFromVerification()
+        ) {
+          setTimeout(() => {
+            const result = window.verificationBridge.autoPopulateForm();
+
+            if (result.success) {
+              feedbackMessage.innerHTML = `
+                <div style="color: green;">
+                  <strong>🔍 AI Verification Integration Success!</strong><br>
+                  ${result.message}<br><br>
+                  <strong>Next steps:</strong><br>
+                  • Review auto-filled content<br>
+                  • Add position number and images<br>
+                  • Click "Publish Article" when ready
+                </div>
+              `;
+            }
+          }, 500);
+        }
+      });
+    </script>
+  </body>
+</html>

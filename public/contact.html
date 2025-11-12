@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contact Us - The News Curator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Lato:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Lato', sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: 'Newsreader', serif;
+      }
+      .body-text p {
+        font-family: 'Newsreader', serif;
+        font-size: 1.125rem; /* 18px */
+        line-height: 1.75rem; /* 28px */
+        margin-bottom: 1.5rem; /* 24px */
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3e84b6', // Bright Blue
+              'background-light': '#F8F9FA',
+              'background-dark': '#121a20',
+              'text-primary': '#313e52', // Dark Slate Blue
+              'text-secondary': '#a2b1b3', // Muted Silver
+              accent: '#496a8a', // Steel Blue
+              'slate-blue': '#313e52',
+              'steel-blue': '#496a8a',
+              'heather-gray': '#a2b1b3',
+            },
+            fontFamily: {
+              display: ['Newsreader', 'serif'],
+              sans: ['Lato', 'sans-serif'],
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-sans text-text-primary dark:text-gray-200"
+  >
+    <div class="relative flex min-h-screen w-full flex-col">
+      <!-- TopNavBar -->
+      <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-blue/20 dark:border-steel-blue/30 px-6 md:px-10 lg:px-20 py-4 bg-slate-blue text-heather-gray"
+      >
+        <!-- Logo Section -->
+        <div class="flex items-center gap-3 text-white">
+          <img
+            src="assets/logo.png"
+            alt="The News Curator Logo"
+            class="h-16 w-16 object-contain"
+          />
+          <div class="flex flex-col">
+            <h2
+              class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
+            >
+              The News Curator
+            </h2>
+            <p class="text-xs text-heather-gray/80 leading-tight">
+              Curating the news that matters
+            </p>
+          </div>
+        </div>
+
+        <!-- Centered Navigation -->
+        <nav class="hidden md:flex items-center justify-center gap-6 flex-1">
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >World</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >Technology</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >Business</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >Economy</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >Environment</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >Education</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >Law & Crime</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="/"
+            >Science</a
+          >
+          <a
+            class="text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="primary-sources.html"
+            >Primary Sources</a
+          >
+        </nav>
+
+        <!-- Right Side Section -->
+        <div class="flex items-center gap-4">
+          <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+            <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+              <div
+                class="text-heather-gray flex border-none bg-steel-blue/50 items-center justify-center pl-3 rounded-l-lg border-r-0"
+              >
+                <span class="material-symbols-outlined">search</span>
+              </div>
+              <input
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-steel-blue/50 focus:border-none h-full placeholder:text-heather-gray px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                placeholder="Search"
+                value=""
+              />
+            </div>
+          </label>
+          <a
+            href="/verification-dashboard.html"
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-green-600 text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-green-700 transition-colors"
+          >
+            <span class="truncate">📊 Dashboard</span>
+          </a>
+          <a
+            href="/create.html"
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+          >
+            <span class="truncate">✏️ Create</span>
+          </a>
+        </div>
+      </header>
+      <main
+        class="container mx-auto w-full max-w-4xl flex-grow px-4 py-8 md:py-12"
+      >
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-12">
+            <h1
+              class="font-display text-4xl md:text-5xl font-bold text-accent dark:text-gray-100 mb-6"
+            >
+              Contact Us
+            </h1>
+            <p
+              class="text-xl text-text-primary/80 dark:text-gray-300 leading-relaxed"
+            >
+              Get in touch with our editorial team
+            </p>
+          </div>
+          <section class="mb-12">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div
+                class="bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20"
+              >
+                <h3
+                  class="font-display text-lg font-bold text-accent dark:text-gray-200 mb-3"
+                >
+                  Editorial Team
+                </h3>
+                <p class="text-text-primary/90 dark:text-gray-300 mb-4">
+                  For story tips, press releases, or editorial inquiries.
+                </p>
+                <p class="text-primary font-semibold">
+                  editorial@newscurator.com
+                </p>
+              </div>
+              <div
+                class="bg-white/50 dark:bg-background-dark/50 p-6 rounded-lg border border-text-secondary/20"
+              >
+                <h3
+                  class="font-display text-lg font-bold text-accent dark:text-gray-200 mb-3"
+                >
+                  Technical Support
+                </h3>
+                <p class="text-text-primary/90 dark:text-gray-300 mb-4">
+                  For website issues or technical problems.
+                </p>
+                <p class="text-primary font-semibold">
+                  support@newscurator.com
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+      <!-- Footer -->
+      <footer class="bg-slate-blue text-heather-gray mt-16">
+        <div class="max-w-7xl mx-auto py-16 px-6 sm:px-8 lg:px-10">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+              <div class="flex items-center gap-3 text-white mb-4">
+                <img
+                  src="assets/logo.png"
+                  alt="The News Curator Logo"
+                  class="h-8 w-8 object-contain"
+                />
+                <div class="flex flex-col">
+                  <h2
+                    class="font-display text-white text-xl font-bold leading-tight"
+                  >
+                    The News Curator
+                  </h2>
+                  <p class="text-xs text-heather-gray/80 leading-tight">
+                    Curating the news that matters
+                  </p>
+                </div>
+              </div>
+              <p class="text-sm">Your trusted source for verified news.</p>
+            </div>
+            <div>
+              <h3
+                class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+              >
+                Sections
+              </h3>
+              <nav class="flex flex-col space-y-2">
+                <a class="hover:text-white transition-colors" href="/">World</a>
+                <a class="hover:text-white transition-colors" href="/"
+                  >Technology</a
+                >
+                <a class="hover:text-white transition-colors" href="/"
+                  >Business</a
+                >
+                <a class="hover:text-white transition-colors" href="/"
+                  >Economy</a
+                >
+                <a class="hover:text-white transition-colors" href="/"
+                  >Environment</a
+                >
+                <a class="hover:text-white transition-colors" href="/"
+                  >Education</a
+                >
+                <a class="hover:text-white transition-colors" href="/"
+                  >Law & Crime</a
+                >
+                <a class="hover:text-white transition-colors" href="/"
+                  >Science</a
+                >
+              </nav>
+            </div>
+            <div>
+              <h3
+                class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+              >
+                About
+              </h3>
+              <nav class="flex flex-col space-y-2">
+                <a
+                  href="transparency-page.html"
+                  class="hover:text-white transition-colors"
+                  >Transparency</a
+                >
+                <a
+                  href="ai-policy.html"
+                  class="hover:text-white transition-colors"
+                  >AI Policy</a
+                >
+                <a class="hover:text-white transition-colors" href="#"
+                  >Contact</a
+                >
+                <a class="hover:text-white transition-colors" href="#"
+                  >Privacy Policy</a
+                >
+              </nav>
+            </div>
+            <div>
+              <h3
+                class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+              >
+                Follow Us
+              </h3>
+              <div class="flex space-x-4">
+                <!-- Social Icons would go here -->
+                <a class="hover:text-white transition-colors" href="#">
+                  <svg
+                    aria-hidden="true"
+                    class="h-6 w-6"
+                    fill="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+                </a>
+                <a class="hover:text-white transition-colors" href="#">
+                  <svg
+                    aria-hidden="true"
+                    class="h-6 w-6"
+                    fill="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-8 border-t border-steel-blue/50 pt-8 text-center text-sm"
+          >
+            <p>© 2024 The News Curator. All Rights Reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Get article slug from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug');
+
+      // Load article content
+      async function loadArticle() {
+        if (!slug) {
+          document.querySelector('main').innerHTML =
+            '<div class="container mx-auto px-4 py-8"><p class="text-center text-red-500">No article specified.</p></div>';
+          return;
+        }
+
+        try {
+          const response = await fetch(`/api/articles/${slug}`);
+          if (!response.ok) {
+            throw new Error('Article not found');
+          }
+
+          const article = await response.json();
+
+          // Update page title
+          document.title = `${article.title} - The News Curator`;
+
+          // Update article content
+          document.querySelector('h1').textContent =
+            article.title || 'Untitled';
+          document.querySelector('article p').textContent =
+            article.excerpt || '';
+          document.querySelector('.body-text').innerHTML = `<p>${(
+            article.content || ''
+          ).replace(/\n/g, '</p><p>')}</p>`;
+
+          // Update meta information
+          document.querySelector('.text-primary').textContent =
+            article.category || 'Uncategorized';
+          document.querySelector(
+            '.text-text-primary.dark\\:text-gray-200'
+          ).textContent = article.author || 'Unknown Author';
+          document.querySelector(
+            '.text-text-secondary'
+          ).textContent = `Published on ${new Date(
+            article.publishedAt || article.createdAt || Date.now()
+          ).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}`;
+        } catch (error) {
+          console.error('Error loading article:', error);
+          document.querySelector('main').innerHTML =
+            '<div class="container mx-auto px-4 py-8"><p class="text-center text-red-500">Article not found.</p></div>';
+        }
+      }
+
+      // Initialize page
+      document.addEventListener('DOMContentLoaded', loadArticle);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Article Editor - Modern News Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .editor-toolbar {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 0.5rem;
+        background: #f9fafb;
+      }
+      .editor-toolbar button {
+        padding: 0.25rem 0.5rem;
+        margin: 0 0.125rem;
+        border: 1px solid #d1d5db;
+        background: white;
+        border-radius: 0.25rem;
+        cursor: pointer;
+      }
+      .editor-toolbar button:hover {
+        background: #f3f4f6;
+      }
+      .editor-toolbar button.active {
+        background: #3b82f6;
+        color: white;
+      }
+      #content {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+      }
+      .preview-content {
+        line-height: 1.7;
+      }
+      .preview-content h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 1rem 0;
+      }
+      .preview-content h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0.75rem 0;
+      }
+      .preview-content h3 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+      }
+      .preview-content p {
+        margin: 0.75rem 0;
+      }
+      .preview-content ul,
+      .preview-content ol {
+        margin: 0.75rem 0;
+        padding-left: 1.5rem;
+      }
+      .preview-content blockquote {
+        border-left: 4px solid #3b82f6;
+        padding-left: 1rem;
+        margin: 1rem 0;
+        font-style: italic;
+        color: #6b7280;
+      }
+      .preview-content a {
+        color: #3b82f6;
+        text-decoration: underline;
+      }
+      .preview-content strong {
+        font-weight: bold;
+      }
+      .preview-content em {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-gray-900">Article Editor</h1>
+          </div>
+          <nav class="flex space-x-4">
+            <a
+              href="/admin/dashboard.html"
+              class="text-gray-600 hover:text-blue-600"
+              >Dashboard</a
+            >
+            <a href="/admin/editor.html" class="text-blue-600 font-medium"
+              >Editor</a
+            >
+            <a href="/" class="text-gray-600 hover:text-blue-600">View Site</a>
+            <button id="logoutBtn" class="text-gray-600 hover:text-red-600">
+              Logout
+            </button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Editor Section -->
+        <div class="bg-white shadow rounded-lg">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h2 id="editorTitle" class="text-lg font-medium text-gray-900">
+              Create New Article
+            </h2>
+          </div>
+
+          <form id="articleForm" class="p-6 space-y-6">
+            <!-- Title -->
+            <div>
+              <label
+                for="title"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Title</label
+              >
+              <input
+                type="text"
+                id="title"
+                name="title"
+                required
+                maxlength="200"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter article title..."
+              />
+            </div>
+
+            <!-- Excerpt -->
+            <div>
+              <label
+                for="excerpt"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Excerpt</label
+              >
+              <textarea
+                id="excerpt"
+                name="excerpt"
+                required
+                maxlength="300"
+                rows="3"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Brief description of the article..."
+              ></textarea>
+            </div>
+
+            <!-- Category and Author -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="category"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Category</label
+                >
+                <select
+                  id="category"
+                  name="category"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">Select Category</option>
+                  <option value="Politics">Politics</option>
+                  <option value="Science">Science</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Business">Business</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  for="author"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Author</label
+                >
+                <input
+                  type="text"
+                  id="author"
+                  name="author"
+                  required
+                  maxlength="100"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Author name..."
+                />
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div>
+              <label
+                for="tags"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Tags</label
+              >
+              <input
+                type="text"
+                id="tags"
+                name="tags"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="e.g., AI, Healthcare, Innovation (comma-separated)"
+              />
+            </div>
+
+            <!-- Content Editor -->
+            <div>
+              <label
+                for="content"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Content</label
+              >
+
+              <!-- Editor Toolbar -->
+              <div class="editor-toolbar rounded-t-md">
+                <button type="button" onclick="formatText('bold')" title="Bold">
+                  <strong>B</strong>
+                </button>
+                <button
+                  type="button"
+                  onclick="formatText('italic')"
+                  title="Italic"
+                >
+                  <em>I</em>
+                </button>
+                <button
+                  type="button"
+                  onclick="formatText('heading1')"
+                  title="Heading 1"
+                >
+                  H1
+                </button>
+                <button
+                  type="button"
+                  onclick="formatText('heading2')"
+                  title="Heading 2"
+                >
+                  H2
+                </button>
+                <button
+                  type="button"
+                  onclick="formatText('heading3')"
+                  title="Heading 3"
+                >
+                  H3
+                </button>
+                <button type="button" onclick="formatText('link')" title="Link">
+                  🔗
+                </button>
+                <button
+                  type="button"
+                  onclick="formatText('quote')"
+                  title="Quote"
+                >
+                  ❝
+                </button>
+                <button type="button" onclick="formatText('list')" title="List">
+                  •
+                </button>
+              </div>
+
+              <textarea
+                id="content"
+                name="content"
+                required
+                rows="15"
+                class="w-full px-3 py-2 border border-gray-300 rounded-b-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                placeholder="Write your article content here... You can use markdown formatting."
+              ></textarea>
+            </div>
+
+            <!-- Options -->
+            <div class="flex items-center space-x-4">
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  id="featured"
+                  name="featured"
+                  class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <span class="ml-2 text-sm text-gray-700">Featured Article</span>
+              </label>
+
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  id="published"
+                  name="published"
+                  class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  checked
+                />
+                <span class="ml-2 text-sm text-gray-700">Published</span>
+              </label>
+
+              <button
+                type="button"
+                id="saveDraftBtn"
+                class="text-sm text-gray-600 hover:text-gray-800"
+              >
+                💾 Save Draft
+              </button>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex space-x-4 pt-4 border-t border-gray-200">
+              <button
+                type="button"
+                id="previewBtn"
+                class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                👁️ Preview
+              </button>
+              <button
+                type="submit"
+                id="saveBtn"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                💾 Save Article
+              </button>
+              <a
+                href="/admin/dashboard.html"
+                class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="bg-white shadow rounded-lg">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h2 class="text-lg font-medium text-gray-900">Live Preview</h2>
+          </div>
+
+          <div id="previewContent" class="p-6 preview-content min-h-96">
+            <p class="text-gray-500 italic">
+              Start typing to see a live preview...
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      let currentArticleId = null;
+      let isDraft = false;
+
+      // Check authentication on page load
+      async function checkAuth() {
+        try {
+          const response = await fetch('/api/auth/status', {
+            credentials: 'include',
+          });
+          const data = await response.json();
+
+          if (!data.authenticated) {
+            window.location.href = '/admin/login.html';
+            return false;
+          }
+          return true;
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          window.location.href = '/admin/login.html';
+          return false;
+        }
+      }
+
+      // Load article for editing
+      async function loadArticleForEdit(articleId) {
+        try {
+          const response = await fetch(`/api/articles/${articleId}`, {
+            credentials: 'include',
+          });
+
+          if (response.status === 401) {
+            window.location.href = '/admin/login.html';
+            return;
+          }
+
+          const article = await response.json();
+
+          currentArticleId = articleId;
+          document.getElementById('editorTitle').textContent = 'Edit Article';
+
+          // Populate form
+          document.getElementById('title').value = article.title;
+          document.getElementById('excerpt').value = article.excerpt;
+          document.getElementById('category').value = article.category;
+          document.getElementById('author').value = article.author;
+          document.getElementById('tags').value = article.tags
+            ? article.tags.join(', ')
+            : '';
+          document.getElementById('content').value = article.content;
+          document.getElementById('featured').checked = article.featured;
+          document.getElementById('published').checked =
+            article.published !== false;
+
+          // Update preview
+          updatePreview();
+        } catch (error) {
+          console.error('Failed to load article:', error);
+          showNotification('Failed to load article for editing', 'error');
+        }
+      }
+
+      // Format text (simple markdown helpers)
+      function formatText(format) {
+        const textarea = document.getElementById('content');
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const selectedText = textarea.value.substring(start, end);
+        let replacement = '';
+
+        switch (format) {
+          case 'bold':
+            replacement = `**${selectedText || 'bold text'}**`;
+            break;
+          case 'italic':
+            replacement = `*${selectedText || 'italic text'}*`;
+            break;
+          case 'heading1':
+            replacement = `# ${selectedText || 'Heading 1'}`;
+            break;
+          case 'heading2':
+            replacement = `## ${selectedText || 'Heading 2'}`;
+            break;
+          case 'heading3':
+            replacement = `### ${selectedText || 'Heading 3'}`;
+            break;
+          case 'link':
+            const url = prompt('Enter URL:');
+            replacement = `[${selectedText || 'link text'}](${
+              url || 'https://example.com'
+            })`;
+            break;
+          case 'quote':
+            replacement = `> ${selectedText || 'quoted text'}`;
+            break;
+          case 'list':
+            replacement = `- ${selectedText || 'list item'}`;
+            break;
+        }
+
+        textarea.value =
+          textarea.value.substring(0, start) +
+          replacement +
+          textarea.value.substring(end);
+        textarea.focus();
+
+        // Update preview
+        updatePreview();
+      }
+
+      // Simple markdown to HTML converter
+      function markdownToHtml(markdown) {
+        return markdown
+          .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+          .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+          .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+          .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
+          .replace(/^- (.*$)/gim, '<li>$1</li>')
+          .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+          .replace(/\n/g, '</p><p>')
+          .replace(/^(.*)$/, '<p>$1</p>')
+          .replace(/<p><\/p>/g, '')
+          .replace(/<p>(<h[1-6]>)/g, '$1')
+          .replace(/(<\/h[1-6]>)<\/p>/g, '$1')
+          .replace(/<p>(<ul>)/g, '$1')
+          .replace(/(<\/ul>)<\/p>/g, '$1')
+          .replace(/<p>(<blockquote>)/g, '$1')
+          .replace(/(<\/blockquote>)<\/p>/g, '$1');
+      }
+
+      // Update live preview
+      function updatePreview() {
+        const title = document.getElementById('title').value;
+        const excerpt = document.getElementById('excerpt').value;
+        const category = document.getElementById('category').value;
+        const author = document.getElementById('author').value;
+        const content = document.getElementById('content').value;
+
+        const previewContent = document.getElementById('previewContent');
+
+        if (!title && !content) {
+          previewContent.innerHTML =
+            '<p class="text-gray-500 italic">Start typing to see a live preview...</p>';
+          return;
+        }
+
+        const htmlContent = markdownToHtml(content);
+
+        previewContent.innerHTML = `
+          <article class="prose max-w-none">
+            ${
+              category
+                ? `<div class="mb-4"><span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">${category}</span></div>`
+                : ''
+            }
+            ${
+              title
+                ? `<h1 class="text-3xl font-bold text-gray-900 mb-4">${title}</h1>`
+                : ''
+            }
+            ${
+              excerpt
+                ? `<p class="text-lg text-gray-600 mb-6 italic">${excerpt}</p>`
+                : ''
+            }
+            ${
+              author
+                ? `<div class="text-sm text-gray-500 mb-6">By ${author}</div>`
+                : ''
+            }
+            <div class="prose-content">
+              ${htmlContent}
+            </div>
+          </article>
+        `;
+      }
+
+      // Get form data
+      function getFormData() {
+        return {
+          title: document.getElementById('title').value.trim(),
+          excerpt: document.getElementById('excerpt').value.trim(),
+          category: document.getElementById('category').value,
+          author: document.getElementById('author').value.trim(),
+          tags: document
+            .getElementById('tags')
+            .value.split(',')
+            .map((tag) => tag.trim())
+            .filter((tag) => tag),
+          content: document.getElementById('content').value.trim(),
+          featured: document.getElementById('featured').checked,
+          published: document.getElementById('published').checked,
+        };
+      }
+
+      // Save article
+      async function saveArticle(asDraft = false) {
+        const formData = getFormData();
+
+        // Basic validation
+        if (
+          !formData.title ||
+          !formData.excerpt ||
+          !formData.category ||
+          !formData.author ||
+          !formData.content
+        ) {
+          showNotification('Please fill in all required fields', 'error');
+          return;
+        }
+
+        const saveBtn = document.getElementById('saveBtn');
+        const originalText = saveBtn.textContent;
+        saveBtn.disabled = true;
+        saveBtn.textContent = asDraft ? 'Saving Draft...' : 'Saving...';
+
+        try {
+          let response;
+          if (currentArticleId) {
+            // Update existing article
+            response = await fetch(`/api/articles/${currentArticleId}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
+              body: JSON.stringify(formData),
+            });
+          } else {
+            // Create new article
+            response = await fetch('/api/articles', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
+              body: JSON.stringify(formData),
+            });
+          }
+
+          if (response.ok) {
+            const article = await response.json();
+            showNotification(
+              currentArticleId
+                ? 'Article updated successfully'
+                : 'Article created successfully',
+              'success'
+            );
+
+            if (!asDraft) {
+              // Redirect to dashboard after short delay
+              setTimeout(() => {
+                window.location.href = '/admin/dashboard.html';
+              }, 1500);
+            } else {
+              currentArticleId = article._id;
+              isDraft = true;
+            }
+          } else {
+            const error = await response.json();
+            showNotification(
+              error.message || 'Failed to save article',
+              'error'
+            );
+          }
+        } catch (error) {
+          console.error('Save failed:', error);
+          showNotification('Failed to save article', 'error');
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = originalText;
+        }
+      }
+
+      // Logout
+      async function logout() {
+        try {
+          await fetch('/api/auth/logout', {
+            method: 'POST',
+            credentials: 'include',
+          });
+          window.location.href = '/admin/login.html';
+        } catch (error) {
+          console.error('Logout failed:', error);
+          window.location.href = '/admin/login.html';
+        }
+      }
+
+      // Show notification
+      function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 px-4 py-2 rounded-md text-white z-50 ${
+          type === 'success'
+            ? 'bg-green-500'
+            : type === 'error'
+            ? 'bg-red-500'
+            : 'bg-blue-500'
+        }`;
+        notification.textContent = message;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      }
+
+      // Initialize editor
+      document.addEventListener('DOMContentLoaded', async function () {
+        if (await checkAuth()) {
+          // Check if editing existing article
+          const urlParams = new URLSearchParams(window.location.search);
+          const articleId = urlParams.get('id');
+
+          if (articleId) {
+            await loadArticleForEdit(articleId);
+          }
+
+          // Setup event listeners
+          document
+            .getElementById('articleForm')
+            .addEventListener('submit', function (e) {
+              e.preventDefault();
+              saveArticle(false);
+            });
+
+          document
+            .getElementById('saveDraftBtn')
+            .addEventListener('click', function () {
+              saveArticle(true);
+            });
+
+          document
+            .getElementById('logoutBtn')
+            .addEventListener('click', logout);
+
+          // Live preview updates
+          ['title', 'excerpt', 'category', 'author', 'content'].forEach(
+            (id) => {
+              document
+                .getElementById(id)
+                .addEventListener('input', updatePreview);
+            }
+          );
+
+          // Initial preview update
+          updatePreview();
+        }
+      });
+    </script>
+  </body>
+</html>

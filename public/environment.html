@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Environment - The News Curator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&amp;family=Inter:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style type="text/tailwindcss">
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+
+      .article-square {
+        background-color: #f3f4f6;
+        border: 2px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #6b7280;
+        font-size: 24px;
+      }
+
+      .main-story {
+        height: 400px;
+      }
+
+      .featured-story {
+        height: 250px;
+      }
+
+      .latest-story {
+        height: 200px;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3e84b6',
+              'background-light': '#f6f7f8',
+              'background-dark': '#121a20',
+              'slate-blue': '#313e52',
+              'steel-blue': '#496a8a',
+              'heather-gray': '#a2b1b3',
+            },
+            fontFamily: {
+              display: ['Lora', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark font-sans">
+    <!-- TopNavBar - Sticky -->
+    <header
+      class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-blue/20 dark:border-steel-blue/30 px-6 md:px-10 lg:px-20 py-4 bg-slate-blue text-heather-gray"
+    >
+      <!-- Logo and Tagline -->
+      <div class="flex items-center gap-3 text-white">
+        <img
+          src="assets/logo.png"
+          alt="The News Curator Logo"
+          class="h-10 w-10"
+        />
+        <div>
+          <h2
+            class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
+          >
+            The News Curator
+          </h2>
+          <p class="text-heather-gray text-xs font-medium">
+            Curating the news that matters
+          </p>
+        </div>
+      </div>
+
+      <!-- Centered Navigation -->
+      <nav class="hidden md:flex items-center justify-center gap-8 flex-1">
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="index.html"
+          >Home</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="world.html"
+          >World</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="technology.html"
+          >Technology</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="business.html"
+          >Business</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="economy.html"
+          >Economy</a
+        >
+        <a
+          class="text-base font-medium leading-normal text-white"
+          href="environment.html"
+          >Environment</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="education.html"
+          >Education</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="law-crime.html"
+          >Law & Crime</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="science.html"
+          >Science</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="politics.html"
+          >Politics</a
+        >
+        <a
+          class="text-base font-medium leading-normal hover:text-white transition-colors"
+          href="primary-sources.html"
+          >Primary Sources</a
+        >
+      </nav>
+
+      <!-- Search Bar -->
+      <div class="flex items-center">
+        <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+          <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+            <div
+              class="text-heather-gray flex border-none bg-steel-blue/50 items-center justify-center pl-3 rounded-l-lg border-r-0"
+            >
+              <span class="material-symbols-outlined">search</span>
+            </div>
+            <input
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-steel-blue/50 focus:border-none h-full placeholder:text-heather-gray px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+              placeholder="Search"
+              value=""
+            />
+          </div>
+        </label>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex flex-1 justify-center py-5">
+      <div class="layout-content-container flex flex-col w-full max-w-6xl px-4">
+        <!-- SHOWCASE Article (Position envi-1) -->
+        <section class="py-8">
+          <div class="article-square main-story" data-spot="envi-1">envi-1</div>
+        </section>
+
+        <!-- FEATURED Articles Section (Positions envi-2 to envi-8) -->
+        <section class="py-8">
+          <h2
+            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
+          >
+            Featured Environment Stories
+          </h2>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 mb-4"
+          >
+            <div class="article-square featured-story" data-spot="envi-2">
+              envi-2
+            </div>
+            <div class="article-square featured-story" data-spot="envi-3">
+              envi-3
+            </div>
+            <div class="article-square featured-story" data-spot="envi-4">
+              envi-4
+            </div>
+            <div class="article-square featured-story" data-spot="envi-5">
+              envi-5
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+            <div class="article-square featured-story" data-spot="envi-6">
+              envi-6
+            </div>
+            <div class="article-square featured-story" data-spot="envi-7">
+              envi-7
+            </div>
+            <div class="article-square featured-story" data-spot="envi-8">
+              envi-8
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-blue text-heather-gray">
+      <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex items-center gap-3 text-white mb-4">
+              <div class="size-6 text-primary">
+                <svg
+                  fill="none"
+                  viewbox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+              <h2
+                class="font-display text-white text-xl font-bold leading-tight"
+              >
+                The News Curator
+              </h2>
+            </div>
+            <p class="text-sm">Your trusted source for verified news</p>
+          </div>
+          <div>
+            <h3
+              class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+            >
+              Sections
+            </h3>
+            <nav class="flex flex-col space-y-2">
+              <a class="hover:text-white transition-colors" href="index.html"
+                >World</a
+              >
+              <a
+                class="hover:text-white transition-colors"
+                href="technology.html"
+                >Technology</a
+              >
+              <a class="hover:text-white transition-colors" href="business.html"
+                >Business</a
+              >
+              <a class="hover:text-white transition-colors" href="politics.html"
+                >Politics</a
+              >
+              <a class="hover:text-white transition-colors" href="economy.html"
+                >Economy</a
+              >
+              <a
+                class="hover:text-white transition-colors"
+                href="environment.html"
+                >Environment</a
+              >
+              <a
+                class="hover:text-white transition-colors"
+                href="education.html"
+                >Education</a
+              >
+              <a
+                class="hover:text-white transition-colors"
+                href="law-crime.html"
+                >Law & Crime</a
+              >
+              <a class="hover:text-white transition-colors" href="science.html"
+                >Science</a
+              >
+            </nav>
+          </div>
+          <div>
+            <h3
+              class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+            >
+              About
+            </h3>
+            <nav class="flex flex-col space-y-2">
+              <a class="hover:text-white transition-colors" href="#"
+                >Transparency</a
+              >
+              <a class="hover:text-white transition-colors" href="#"
+                >AI Policy</a
+              >
+              <a class="hover:text-white transition-colors" href="#">Contact</a>
+              <a class="hover:text-white transition-colors" href="#"
+                >Privacy Policy</a
+              >
+            </nav>
+          </div>
+          <div>
+            <h3
+              class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+            >
+              Follow Us
+            </h3>
+            <div class="flex space-x-4">
+              <a class="hover:text-white transition-colors" href="#">
+                <svg
+                  aria-hidden="true"
+                  class="h-6 w-6"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                    fill-rule="evenodd"
+                  ></path>
+                </svg>
+              </a>
+              <a class="hover:text-white transition-colors" href="#">
+                <svg
+                  aria-hidden="true"
+                  class="h-6 w-6"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 border-t border-steel-blue/50 pt-8 text-center text-sm"
+        >
+          <p>© 2024 The News Curator. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Simple article loader -->
+    <script src="js/simple-articles.js"></script>
+
+    <script>
+      // Simple initialization
+      document.addEventListener('DOMContentLoaded', function () {
+        console.log('Environment page loaded');
+      });
+    </script>
+  </body>
+</html>

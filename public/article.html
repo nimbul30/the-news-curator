@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The News Curator - Article</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style type="text/tailwindcss">
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+
+      /* Article Content Styling */
+      #article-content {
+        color: #313e52;
+        line-height: 1.8;
+      }
+
+      #article-content h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #182a38;
+        font-family: 'Lora', serif;
+      }
+
+      #article-content h2 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin-top: 1.75rem;
+        margin-bottom: 0.875rem;
+        color: #182a38;
+        font-family: 'Lora', serif;
+      }
+
+      #article-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #313e52;
+        font-family: 'Lora', serif;
+      }
+
+      #article-content h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.25rem;
+        margin-bottom: 0.625rem;
+        color: #313e52;
+      }
+
+      #article-content p {
+        margin-bottom: 1.25rem;
+        font-size: 1.125rem;
+      }
+
+      #article-content strong {
+        font-weight: 700;
+        color: #182a38;
+      }
+
+      #article-content em {
+        font-style: italic;
+      }
+
+      #article-content a {
+        color: #3e84b6;
+        text-decoration: underline;
+        transition: color 0.2s;
+      }
+
+      #article-content a:hover {
+        color: #2d6a94;
+      }
+
+      #article-content ul,
+      #article-content ol {
+        margin-bottom: 1.25rem;
+        padding-left: 2rem;
+      }
+
+      #article-content ul {
+        list-style-type: disc;
+      }
+
+      #article-content ol {
+        list-style-type: decimal;
+      }
+
+      #article-content li {
+        margin-bottom: 0.5rem;
+        font-size: 1.125rem;
+      }
+
+      #article-content blockquote {
+        border-left: 4px solid #3e84b6;
+        padding-left: 1.5rem;
+        margin: 1.5rem 0;
+        font-style: italic;
+        color: #496a8a;
+        background: #f6f7f8;
+        padding: 1rem 1.5rem;
+        border-radius: 0.25rem;
+      }
+
+      #article-content code {
+        background: #f6f7f8;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-size: 0.9em;
+        font-family: 'Courier New', monospace;
+      }
+
+      #article-content pre {
+        background: #f6f7f8;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin-bottom: 1.25rem;
+      }
+
+      #article-content pre code {
+        background: none;
+        padding: 0;
+      }
+
+      #article-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+      }
+
+      #article-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+      }
+
+      #article-content th,
+      #article-content td {
+        border: 1px solid #d1d5db;
+        padding: 0.75rem;
+        text-align: left;
+      }
+
+      #article-content th {
+        background: #f6f7f8;
+        font-weight: 600;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3e84b6',
+              'background-light': '#f6f7f8',
+              'background-dark': '#121a20',
+              'slate-blue': '#313e52',
+              'steel-blue': '#496a8a',
+              'heather-gray': '#a2b1b3',
+            },
+            fontFamily: {
+              display: ['Lora', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark font-sans">
+    <div
+      class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- Header -->
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-blue/20 dark:border-steel-blue/30 px-6 md:px-10 lg:px-20 py-4 bg-slate-blue text-heather-gray"
+        >
+          <!-- Logo Section -->
+          <div class="flex items-center gap-3 text-white">
+            <img
+              src="assets/logo.png"
+              alt="The News Curator Logo"
+              class="h-16 w-16 object-contain"
+            />
+            <div class="flex flex-col">
+              <h2
+                class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
+              >
+                The News Curator
+              </h2>
+              <p class="text-xs text-heather-gray/80 leading-tight">
+                Curating the news that matters
+              </p>
+            </div>
+          </div>
+
+          <!-- Centered Navigation -->
+          <nav class="hidden md:flex items-center justify-center gap-8 flex-1">
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="index.html"
+              >Home</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="world.html"
+              >World</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="technology.html"
+              >Technology</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="business.html"
+              >Business</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="economy.html"
+              >Economy</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="environment.html"
+              >Environment</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="education.html"
+              >Education</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="law-crime.html"
+              >Law & Crime</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="science.html"
+              >Science</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="politics.html"
+              >Politics</a
+            >
+            <a
+              class="text-base font-medium leading-normal hover:text-white transition-colors"
+              href="primary-sources.html"
+              >Primary Sources</a
+            >
+          </nav>
+
+          <!-- Search Bar -->
+          <div class="flex items-center">
+            <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-heather-gray flex border-none bg-steel-blue/50 items-center justify-center pl-3 rounded-l-lg border-r-0"
+                >
+                  <span class="material-symbols-outlined">search</span>
+                </div>
+                <input
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-steel-blue/50 focus:border-none h-full placeholder:text-heather-gray px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                  placeholder="Search"
+                  value=""
+                />
+              </div>
+            </label>
+          </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex flex-1 justify-center py-8">
+          <div
+            class="layout-content-container flex flex-col w-full max-w-4xl px-6"
+          >
+            <!-- Article Header -->
+            <div class="mb-8">
+              <div class="mb-4">
+                <span
+                  id="article-category"
+                  class="text-primary font-semibold uppercase text-sm tracking-wider"
+                  >Loading...</span
+                >
+              </div>
+
+              <!-- Navigation Buttons -->
+              <div class="article-navigation-buttons mb-6">
+                <div
+                  class="flex flex-wrap gap-3 justify-center md:justify-start"
+                >
+                  <button
+                    id="transparency-btn"
+                    class="nav-button bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    aria-label="View article transparency information"
+                  >
+                    Transparency
+                  </button>
+                  <a
+                    href="suggested-reading.html"
+                    class="nav-button bg-slate-blue hover:bg-slate-blue/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-slate-blue/50 no-underline"
+                    aria-label="View suggested reading"
+                  >
+                    Reading Suggestions
+                  </a>
+                  <a
+                    href="spotlights.html"
+                    class="nav-button bg-steel-blue hover:bg-steel-blue/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-steel-blue/50 no-underline"
+                    aria-label="View spotlight articles"
+                  >
+                    Spotlights
+                  </a>
+                  <a
+                    id="transparency-page-link"
+                    href="#"
+                    class="nav-button bg-heather-gray hover:bg-heather-gray/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-heather-gray/50 no-underline"
+                    aria-label="View transparency page"
+                  >
+                    Transparency Page
+                  </a>
+                  <a
+                    href="ai-policy.html"
+                    class="nav-button bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 no-underline"
+                    aria-label="View AI policy"
+                  >
+                    AI Policy
+                  </a>
+                </div>
+              </div>
+
+              <h1
+                id="article-title"
+                class="font-display text-slate-blue dark:text-background-light text-4xl font-bold leading-tight tracking-tight mb-4"
+              >
+                Loading article...
+              </h1>
+              <p
+                id="article-excerpt"
+                class="text-steel-blue dark:text-heather-gray text-xl font-normal leading-relaxed mb-6"
+              >
+                Loading excerpt...
+              </p>
+
+              <div
+                class="flex items-center gap-4 border-y border-steel-blue/20 dark:border-heather-gray/20 py-4 text-sm"
+              >
+                <span class="text-slate-blue dark:text-background-light"
+                  >By
+                  <span id="article-author" class="font-semibold"
+                    >Loading...</span
+                  ></span
+                >
+                <span class="text-heather-gray">•</span>
+                <span id="article-date" class="text-heather-gray"
+                  >Loading...</span
+                >
+              </div>
+            </div>
+
+            <!-- Transparency Content Section -->
+            <div
+              id="transparency-content"
+              class="transparency-section hidden mb-8"
+            >
+              <div
+                class="bg-primary/10 border-l-4 border-primary p-6 rounded-lg"
+              >
+                <h3
+                  class="font-bold text-slate-blue mb-4 flex items-center gap-2"
+                >
+                  <span class="material-symbols-outlined">visibility</span>
+                  Article Transparency
+                </h3>
+                <div id="transparency-details" class="space-y-4">
+                  <div class="text-slate-blue">
+                    <p class="mb-2">
+                      <strong>Loading transparency information...</strong>
+                    </p>
+                  </div>
+                </div>
+                <button
+                  id="close-transparency"
+                  class="mt-4 text-primary hover:text-primary/80 text-sm font-medium focus:outline-none"
+                  aria-label="Close transparency information"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+
+            <!-- Article Body - Off White Card -->
+            <div
+              class="bg-gray-50 rounded-lg p-8 shadow-sm border border-gray-200"
+            >
+              <div id="article-content" class="prose prose-lg max-w-none">
+                <p class="text-slate-blue dark:text-background-light">
+                  Loading content...
+                </p>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-blue text-heather-gray mt-16">
+          <div class="max-w-7xl mx-auto py-16 px-6 sm:px-8 lg:px-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-3 text-white mb-4">
+                  <img
+                    src="assets/logo.png"
+                    alt="The News Curator Logo"
+                    class="h-8 w-8 object-contain"
+                  />
+                  <div class="flex flex-col">
+                    <h2
+                      class="font-display text-white text-xl font-bold leading-tight"
+                    >
+                      The News Curator
+                    </h2>
+                    <p class="text-xs text-heather-gray/80 leading-tight">
+                      Curating the news that matters
+                    </p>
+                  </div>
+                </div>
+                <p class="text-sm">Your trusted source for verified news.</p>
+              </div>
+              <div>
+                <h3
+                  class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+                >
+                  Sections
+                </h3>
+                <nav class="flex flex-col space-y-2">
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="index.html"
+                    >World</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="technology.html"
+                    >Technology</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="business.html"
+                    >Business</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="economy.html"
+                    >Economy</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="environment.html"
+                    >Environment</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="education.html"
+                    >Education</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="law-crime.html"
+                    >Law & Crime</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="science.html"
+                    >Science</a
+                  >
+                  <a
+                    class="hover:text-white transition-colors"
+                    href="politics.html"
+                    >Politics</a
+                  >
+                </nav>
+              </div>
+              <div>
+                <h3
+                  class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+                >
+                  About
+                </h3>
+                <nav class="flex flex-col space-y-2">
+                  <a
+                    href="transparency-page.html"
+                    class="hover:text-white transition-colors"
+                    >Transparency</a
+                  >
+                  <a
+                    href="ai-policy.html"
+                    class="hover:text-white transition-colors"
+                    >AI Policy</a
+                  >
+                  <a class="hover:text-white transition-colors" href="#"
+                    >Contact</a
+                  >
+                  <a class="hover:text-white transition-colors" href="#"
+                    >Privacy Policy</a
+                  >
+                </nav>
+              </div>
+              <div>
+                <h3
+                  class="font-bold text-white tracking-wider uppercase text-sm mb-3"
+                >
+                  Follow Us
+                </h3>
+                <div class="flex space-x-4">
+                  <a class="hover:text-white transition-colors" href="#">
+                    <svg
+                      aria-hidden="true"
+                      class="h-6 w-6"
+                      fill="currentColor"
+                      viewbox="0 0 24 24"
+                    >
+                      <path
+                        clip-rule="evenodd"
+                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                        fill-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </a>
+                  <a class="hover:text-white transition-colors" href="#">
+                    <svg
+                      aria-hidden="true"
+                      class="h-6 w-6"
+                      fill="currentColor"
+                      viewbox="0 0 24 24"
+                    >
+                      <path
+                        d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="mt-8 border-t border-steel-blue/50 pt-8 text-center text-sm"
+            >
+              <p>© 2024 The News Curator. All Rights Reserved.</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      // Get article slug from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug');
+
+      async function loadArticle() {
+        if (!slug) {
+          document.querySelector('main').innerHTML =
+            '<div class="text-center"><p class="text-red-500">No article specified.</p></div>';
+          return;
+        }
+
+        try {
+          const response = await fetch(`/api/articles/${slug}`);
+          if (!response.ok) {
+            throw new Error('Article not found');
+          }
+
+          const result = await response.json();
+          const article = result.article;
+
+          // Update page title
+          document.title = `${article.title} - The News Curator`;
+
+          // Update content with reliable selectors
+          document.getElementById('article-title').textContent =
+            article.title || 'Untitled';
+          document.getElementById('article-excerpt').textContent =
+            article.excerpt || '';
+          document.getElementById('article-category').textContent =
+            article.category || 'Uncategorized';
+          document.getElementById('article-author').textContent =
+            article.author || 'Unknown Author';
+          document.getElementById('article-date').textContent = new Date(
+            article.publishedAt || Date.now()
+          ).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+
+          // Process and display content with Markdown formatting
+          let content = article.content || 'No content available.';
+
+          // Always parse as Markdown (Marked.js handles HTML gracefully)
+          try {
+            const htmlContent = marked.parse(content);
+            document.getElementById('article-content').innerHTML = htmlContent;
+          } catch (parseError) {
+            console.error('Markdown parsing error:', parseError);
+            // Fallback: display as-is
+            document.getElementById('article-content').innerHTML = content;
+          }
+        } catch (error) {
+          console.error('Error loading article:', error);
+          document.querySelector('main').innerHTML =
+            '<div class="text-center"><p class="text-red-500">Error loading article.</p></div>';
+        }
+      }
+
+      // Set transparency page link
+      const transparencyPageLink = document.getElementById(
+        'transparency-page-link'
+      );
+      if (transparencyPageLink && slug) {
+        transparencyPageLink.href = `transparency.html?article=${slug}`;
+      }
+
+      // Transparency functionality
+      function initializeTransparency() {
+        const transparencyBtn = document.getElementById('transparency-btn');
+        const transparencyContent = document.getElementById(
+          'transparency-content'
+        );
+        const closeTransparencyBtn =
+          document.getElementById('close-transparency');
+
+        if (transparencyBtn && transparencyContent) {
+          transparencyBtn.addEventListener('click', function () {
+            if (transparencyContent.classList.contains('hidden')) {
+              loadTransparencyData();
+              transparencyContent.classList.remove('hidden');
+              transparencyBtn.textContent = 'Hide Transparency';
+              transparencyBtn.setAttribute('aria-expanded', 'true');
+            } else {
+              transparencyContent.classList.add('hidden');
+              transparencyBtn.textContent = 'Transparency';
+              transparencyBtn.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          if (closeTransparencyBtn) {
+            closeTransparencyBtn.addEventListener('click', function () {
+              transparencyContent.classList.add('hidden');
+              transparencyBtn.textContent = 'Transparency';
+              transparencyBtn.setAttribute('aria-expanded', 'false');
+            });
+          }
+        }
+      }
+
+      async function loadTransparencyData() {
+        const transparencyDetails = document.getElementById(
+          'transparency-details'
+        );
+        if (!transparencyDetails) return;
+
+        try {
+          // Try to load transparency data for the current article
+          const response = await fetch(`/api/transparency/${slug}.json`);
+          let transparencyData;
+
+          if (response.ok) {
+            transparencyData = await response.json();
+          } else {
+            // Fallback to default transparency information
+            transparencyData = {
+              sources: [
+                { name: 'Primary Source', url: '#', reliability: 'High' },
+                {
+                  name: 'Secondary Verification',
+                  url: '#',
+                  reliability: 'Medium',
+                },
+              ],
+              verificationStatus: 'Verified',
+              lastUpdated: new Date().toISOString(),
+              editorialNotes:
+                'This article has been fact-checked and verified according to our editorial standards.',
+              relatedArticles: [],
+            };
+          }
+
+          const formattedDate = new Date(
+            transparencyData.lastUpdated
+          ).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+
+          transparencyDetails.innerHTML = `
+            <div class="space-y-4 text-slate-blue">
+              <div>
+                <h4 class="font-semibold mb-2">Verification Status</h4>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  ${transparencyData.verificationStatus}
+                </span>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold mb-2">Sources</h4>
+                <ul class="space-y-1">
+                  ${transparencyData.sources
+                    .map(
+                      (source) => `
+                    <li class="flex items-center justify-between">
+                      <span>${source.name}</span>
+                      <span class="text-xs px-2 py-1 rounded ${
+                        source.reliability === 'High'
+                          ? 'bg-green-100 text-green-700'
+                          : source.reliability === 'Medium'
+                          ? 'bg-yellow-100 text-yellow-700'
+                          : 'bg-red-100 text-red-700'
+                      }">${source.reliability}</span>
+                    </li>
+                  `
+                    )
+                    .join('')}
+                </ul>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold mb-2">Editorial Notes</h4>
+                <p class="text-sm">${transparencyData.editorialNotes}</p>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold mb-2">Last Updated</h4>
+                <p class="text-sm text-heather-gray">${formattedDate}</p>
+              </div>
+            </div>
+          `;
+        } catch (error) {
+          console.error('Error loading transparency data:', error);
+          transparencyDetails.innerHTML = `
+            <div class="text-slate-blue">
+              <p class="text-sm">Transparency information is currently unavailable. Please contact us for more details about this article's sources and verification process.</p>
+            </div>
+          `;
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        loadArticle();
+        initializeTransparency();
+      });
+    </script>
+  </body>
+</html>

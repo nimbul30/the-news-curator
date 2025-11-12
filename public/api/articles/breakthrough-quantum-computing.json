@@ -1,0 +1,25 @@
+{
+  "id": "69034f8896599174c53890de",
+  "title": "Breakthrough in Quantum Computing",
+  "slug": "breakthrough-quantum-computing",
+  "excerpt": "Scientists achieve new milestone in quantum computing research.",
+  "content": "# Breakthrough in Quantum Computing\n\nResearchers at leading universities have made significant progress in quantum computing, bringing us closer to practical applications of this revolutionary technology.\n\n## The Breakthrough\n\nRecent developments in quantum error correction have solved long-standing challenges in the field.\n\n## Future Applications\n\nThis breakthrough could transform computing as we know it, with applications in cryptography, drug discovery, and complex simulations.",
+  "category": "Science",
+  "author": "Dr. Sarah Johnson",
+  "publishedAt": "2025-10-30T11:44:08.931Z",
+  "viewCount": 0,
+  "customFields": {
+    "spot_number": 3,
+    "image_url": "https://via.placeholder.com/800x600/6b7d91/eae7db?text=Quantum+Computing",
+    "sources": "Nature Physics, IBM Research, Google Quantum AI",
+    "primary_source": "Nature Physics - Quantum Error Correction Study",
+    "special_report_title": "Quantum Leap: The Race for Quantum Supremacy",
+    "special_report_content": "Major tech companies and research institutions are competing to achieve practical quantum computing. This report examines the current state of the technology and its potential impact.",
+    "suggested_reading": "For technical details, Nature Physics publishes cutting-edge quantum research. IBM and Google regularly share updates on their quantum computing progress through their research blogs.",
+    "bias_analysis": "Coverage focuses on peer-reviewed scientific research and official company announcements. Technical claims are verified against multiple independent sources.",
+    "claim_source_mapping": "Quantum error correction breakthrough - Nature Physics\nPractical applications timeline - IBM Research\nTechnology comparison - Google Quantum AI",
+    "rated_sources": "Nature Physics [Tier 1] - Peer-reviewed scientific journal\nIBM Research [Tier 2] - Corporate research division\nGoogle Quantum AI [Tier 2] - Corporate research team",
+    "is_draft": false
+  },
+  "image_url": "https://via.placeholder.com/800x600/6b7d91/eae7db?text=Quantum+Computing"
+}
