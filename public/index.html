@@ -46,6 +46,171 @@
       .latest-story {
         height: 200px;
       }
+
+      /* Vertical Article Card Styles */
+      .vertical-article-card {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .vertical-article-card:hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+      }
+
+      /* Category Badge Styles */
+      .category-badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #2563eb;
+        transition: color 0.2s ease;
+      }
+
+      .category-badge:hover {
+        color: #1d4ed8;
+      }
+
+      /* Article Date Styles */
+      .article-date {
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+
+      /* Article Title Styles */
+      .article-title {
+        font-family: 'Lora', serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.4;
+        color: #1e293b;
+        transition: color 0.2s ease;
+      }
+
+      .article-title:hover {
+        color: #2563eb;
+      }
+
+      /* Article Excerpt Styles */
+      .article-excerpt {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: #4b5563;
+      }
+
+      /* Desktop: Horizontal Layout (Image Left, Content Right) */
+      @media (min-width: 768px) {
+        .vertical-article-card .article-image-container {
+          width: 33.333333%;
+          flex-shrink: 0;
+        }
+
+        .vertical-article-card .article-content-container {
+          width: 66.666667%;
+          padding: 1.5rem;
+        }
+
+        .vertical-article-card img {
+          height: 100%;
+          min-height: 200px;
+          object-fit: cover;
+        }
+      }
+
+      /* Mobile: Stacked Layout (Image Top, Content Bottom) */
+      @media (max-width: 767px) {
+        .vertical-article-card {
+          flex-direction: column;
+        }
+
+        .vertical-article-card .article-image-container {
+          width: 100%;
+        }
+
+        .vertical-article-card img {
+          height: 12rem;
+          width: 100%;
+          object-fit: cover;
+        }
+
+        .vertical-article-card .article-content-container {
+          padding: 1rem;
+        }
+
+        .article-title {
+          font-size: 1.125rem;
+        }
+
+        .article-excerpt {
+          font-size: 0.8125rem;
+        }
+      }
+
+      /* Tablet: Optimized Layout */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .vertical-article-card .article-content-container {
+          padding: 1.25rem;
+        }
+
+        .article-title {
+          font-size: 1.125rem;
+        }
+      }
+
+      /* Category Section Spacing */
+      #category-sections-container section {
+        margin-bottom: 2rem;
+      }
+
+      #category-sections-container section:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Category Section Header Styles */
+      .category-section-header {
+        transition: color 0.2s ease;
+        color: #000000;
+      }
+
+      .category-section-header:hover {
+        color: #000000;
+      }
+
+      /* Dark Mode Support */
+      .dark .vertical-article-card {
+        background: #1f2937;
+      }
+
+      .dark .article-title {
+        color: #000000;
+      }
+
+      .dark .article-title:hover {
+        color: #000000;
+      }
+
+      .dark .article-excerpt {
+        color: #000000;
+      }
+
+      .dark .article-date {
+        color: #000000;
+      }
+
+      .dark .category-badge {
+        color: #000000;
+      }
+
+      .dark .category-badge:hover {
+        color: #000000;
+      }
     </style>
     <script id="tailwind-config">
       tailwind.config = {
@@ -180,203 +345,104 @@
     <!-- Main Content -->
     <main class="flex flex-1 justify-center py-5">
       <div class="layout-content-container flex flex-col w-full max-w-6xl px-4">
-        <!-- SHOWCASE Article (Position 1) -->
-        <section class="py-8">
-          <div class="article-square main-story" data-spot="1">1</div>
+        <!-- Top Hero Section: Spot 1 (large left) + Spots 2 & 3 stacked (right) -->
+        <section class="py-4">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+            <!-- Spot 1: Main Hero Story (2/3 width on desktop) -->
+            <div class="lg:col-span-2">
+              <div
+                class="article-square main-story"
+                data-spot="1"
+                style="height: 600px"
+              >
+                1
+              </div>
+            </div>
+            <!-- Spots 2 & 3: Stacked vertically (1/3 width on desktop) -->
+            <div class="lg:col-span-1 flex flex-col gap-0">
+              <div
+                class="article-square featured-story"
+                data-spot="2"
+                style="height: 300px"
+              >
+                2
+              </div>
+              <div
+                class="article-square featured-story"
+                data-spot="3"
+                style="height: 300px"
+              >
+                3
+              </div>
+            </div>
+          </div>
         </section>
 
-        <!-- FEATURED Articles Section (Positions 2-8) -->
-        <section class="py-8">
+        <!-- Featured Stories Section -->
+        <section class="py-4">
           <h2
             class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
           >
             Featured Stories
           </h2>
+
+          <!-- Row 1: Spots 4, 5, 6, 7 -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 mb-4"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 mb-4"
           >
-            <div class="article-square featured-story" data-spot="2">2</div>
-            <div class="article-square featured-story" data-spot="3">3</div>
-            <div class="article-square featured-story" data-spot="4">4</div>
-            <div class="article-square featured-story" data-spot="5">5</div>
+            <div
+              class="article-square featured-story"
+              data-spot="4"
+              style="height: 350px"
+            >
+              4
+            </div>
+            <div
+              class="article-square featured-story"
+              data-spot="5"
+              style="height: 350px"
+            >
+              5
+            </div>
+            <div
+              class="article-square featured-story"
+              data-spot="6"
+              style="height: 350px"
+            >
+              6
+            </div>
+            <div
+              class="article-square featured-story"
+              data-spot="7"
+              style="height: 350px"
+            >
+              7
+            </div>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            <div class="article-square featured-story" data-spot="6">6</div>
-            <div class="article-square featured-story" data-spot="7">7</div>
-            <div class="article-square featured-story" data-spot="8">8</div>
+
+          <!-- Row 2: Spots 8, 9 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-0">
+            <div
+              class="article-square featured-story"
+              data-spot="8"
+              style="height: 350px"
+            >
+              8
+            </div>
+            <div
+              class="article-square featured-story"
+              data-spot="9"
+              style="height: 350px"
+            >
+              9
+            </div>
           </div>
         </section>
 
-        <!-- World News Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="index.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >World News</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="9">9</div>
-            <div class="article-square latest-story" data-spot="10">10</div>
-            <div class="article-square latest-story" data-spot="11">11</div>
-            <div class="article-square latest-story" data-spot="12">12</div>
-          </div>
-        </section>
-
-        <!-- Business Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="business.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Business</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="13">13</div>
-            <div class="article-square latest-story" data-spot="14">14</div>
-            <div class="article-square latest-story" data-spot="15">15</div>
-            <div class="article-square latest-story" data-spot="16">16</div>
-          </div>
-        </section>
-
-        <!-- Economy Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="economy.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Economy</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="17">17</div>
-            <div class="article-square latest-story" data-spot="18">18</div>
-            <div class="article-square latest-story" data-spot="19">19</div>
-            <div class="article-square latest-story" data-spot="20">20</div>
-          </div>
-        </section>
-
-        <!-- Technology Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="technology.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Technology</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="21">21</div>
-            <div class="article-square latest-story" data-spot="22">22</div>
-            <div class="article-square latest-story" data-spot="23">23</div>
-            <div class="article-square latest-story" data-spot="24">24</div>
-          </div>
-        </section>
-
-        <!-- Environment Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="environment.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Environment</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="25">25</div>
-            <div class="article-square latest-story" data-spot="26">26</div>
-            <div class="article-square latest-story" data-spot="27">27</div>
-            <div class="article-square latest-story" data-spot="28">28</div>
-          </div>
-        </section>
-
-        <!-- Education Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="education.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Education</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="29">29</div>
-            <div class="article-square latest-story" data-spot="30">30</div>
-            <div class="article-square latest-story" data-spot="31">31</div>
-            <div class="article-square latest-story" data-spot="32">32</div>
-          </div>
-        </section>
-
-        <!-- Law & Crime Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="law-crime.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Law & Crime</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="33">33</div>
-            <div class="article-square latest-story" data-spot="34">34</div>
-            <div class="article-square latest-story" data-spot="35">35</div>
-            <div class="article-square latest-story" data-spot="36">36</div>
-          </div>
-        </section>
-
-        <!-- Science Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="science.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Science</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="37">37</div>
-            <div class="article-square latest-story" data-spot="38">38</div>
-            <div class="article-square latest-story" data-spot="39">39</div>
-            <div class="article-square latest-story" data-spot="40">40</div>
-          </div>
-        </section>
-
-        <!-- Politics Section -->
-        <section class="py-8">
-          <h2
-            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
-          >
-            <a
-              href="politics.html"
-              class="hover:text-primary transition-colors cursor-pointer"
-              >Politics</a
-            >
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-            <div class="article-square latest-story" data-spot="41">41</div>
-            <div class="article-square latest-story" data-spot="42">42</div>
-            <div class="article-square latest-story" data-spot="43">43</div>
-            <div class="article-square latest-story" data-spot="44">44</div>
-          </div>
-        </section>
+        <!-- Dynamic Category Sections Container (Spots 11+) -->
+        <div id="category-sections-container" class="space-y-8">
+          <!-- Category sections will be dynamically inserted here by JavaScript -->
+        </div>
       </div>
     </main>
 
@@ -386,25 +452,22 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="col-span-2 md:col-span-1">
             <div class="flex items-center gap-3 text-white mb-4">
-              <div class="size-6 text-primary">
-                <svg
-                  fill="none"
-                  viewbox="0 0 48 48"
-                  xmlns="http://www.w3.org/2000/svg"
+              <img
+                src="assets/logo.png"
+                alt="The News Curator Logo"
+                class="h-10 w-10"
+              />
+              <div>
+                <h2
+                  class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
                 >
-                  <path
-                    d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
+                  The News Curator
+                </h2>
+                <p class="text-heather-gray text-xs font-medium">
+                  Curating the news that matters
+                </p>
               </div>
-              <h2
-                class="font-display text-white text-xl font-bold leading-tight"
-              >
-                The News Curator
-              </h2>
             </div>
-            <p class="text-sm">Your trusted source for verified news</p>
           </div>
           <div>
             <h3

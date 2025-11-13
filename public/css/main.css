@@ -258,7 +258,7 @@ article:not(:hover) {
 body {
   background-color: var(--pr-primary);
   font-family: var(--font-body);
-  color: var(--pr-text-accent);
+  color: #000000;
   transition: color 0.3s, background-color 0.3s;
 }
 header {
@@ -288,7 +288,7 @@ header {
   font-weight: bold;
   font-family: var(--font-display);
   margin-bottom: 1.5rem;
-  color: var(--pr-text-accent);
+  color: #000000;
   border-bottom: 2px solid var(--pr-nav);
   padding-bottom: 0.5rem;
 }
@@ -331,12 +331,12 @@ header {
   font-size: 1.1rem;
   font-weight: bold;
   font-family: var(--font-display);
-  color: var(--pr-text-accent);
+  color: #000000;
   margin-bottom: 0.5rem;
 }
 .article-item-summary {
   font-size: 0.875rem;
-  color: var(--pr-nav);
+  color: #000000;
 }
 .comment-scroll::-webkit-scrollbar {
   width: 8px;
@@ -363,7 +363,7 @@ header {
   border-bottom: 2px solid var(--pr-nav);
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  color: var(--pr-text-accent);
+  color: #000000;
 }
 .news-article {
   margin-bottom: 1rem;
@@ -383,12 +383,12 @@ header {
 }
 .news-article h4 {
   font-weight: bold;
-  color: var(--pr-text-accent);
+  color: #000000;
   margin-bottom: 0.25rem;
 }
 .news-article p {
   font-size: 0.875rem;
-  color: var(--pr-nav);
+  color: #000000;
 }
 .bg-card-bg {
   background-color: var(--card-bg);

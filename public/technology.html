@@ -28,18 +28,6 @@
         color: #6b7280;
         font-size: 24px;
       }
-
-      .main-story {
-        height: 400px;
-      }
-
-      .featured-story {
-        height: 250px;
-      }
-
-      .latest-story {
-        height: 200px;
-      }
     </style>
     <script id="tailwind-config">
       tailwind.config = {
@@ -58,23 +46,16 @@
               display: ['Lora', 'serif'],
               sans: ['Inter', 'sans-serif'],
             },
-            borderRadius: {
-              DEFAULT: '0.25rem',
-              lg: '0.5rem',
-              xl: '0.75rem',
-              full: '9999px',
-            },
           },
         },
       };
     </script>
   </head>
   <body class="bg-background-light dark:bg-background-dark font-sans">
-    <!-- TopNavBar - Sticky -->
+    <!-- TopNavBar -->
     <header
       class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-blue/20 dark:border-steel-blue/30 px-6 md:px-10 lg:px-20 py-4 bg-slate-blue text-heather-gray"
     >
-      <!-- Logo and Tagline -->
       <div class="flex items-center gap-3 text-white">
         <img
           src="assets/logo.png"
@@ -93,7 +74,6 @@
         </div>
       </div>
 
-      <!-- Centered Navigation -->
       <nav class="hidden md:flex items-center justify-center gap-8 flex-1">
         <a
           class="text-base font-medium leading-normal hover:text-white transition-colors"
@@ -152,7 +132,6 @@
         >
       </nav>
 
-      <!-- Search Bar -->
       <div class="flex items-center">
         <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
           <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
@@ -174,43 +153,140 @@
     <!-- Main Content -->
     <main class="flex flex-1 justify-center py-5">
       <div class="layout-content-container flex flex-col w-full max-w-6xl px-4">
-        <!-- SHOWCASE Article (Position tech-1) -->
-        <section class="py-8">
-          <div class="article-square main-story" data-spot="tech-1">tech-1</div>
+        <!-- Page Title -->
+        <h1
+          class="font-display text-slate-blue dark:text-background-light text-4xl font-bold mb-6"
+        >
+          Technology
+        </h1>
+
+        <!-- Hero Section: tech-1, tech-2, tech-3 -->
+        <section class="py-4">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+            <div class="lg:col-span-2">
+              <div
+                class="article-square"
+                data-spot="tech-1"
+                style="height: 600px"
+              >
+                tech-1
+              </div>
+            </div>
+            <div class="lg:col-span-1 flex flex-col gap-0">
+              <div
+                class="article-square"
+                data-spot="tech-2"
+                style="height: 300px"
+              >
+                tech-2
+              </div>
+              <div
+                class="article-square"
+                data-spot="tech-3"
+                style="height: 300px"
+              >
+                tech-3
+              </div>
+            </div>
+          </div>
         </section>
 
-        <!-- FEATURED Articles Section (Positions tech-2 to tech-8) -->
-        <section class="py-8">
+        <!-- Featured Stories Section -->
+        <section class="py-4">
           <h2
             class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-5 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-4"
           >
-            Featured Technology Stories
+            Featured Stories
           </h2>
+
+          <!-- Row 1: tech-4, tech-5, tech-6, tech-7 -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 mb-4"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 mb-4"
           >
-            <div class="article-square featured-story" data-spot="tech-2">
-              tech-2
-            </div>
-            <div class="article-square featured-story" data-spot="tech-3">
-              tech-3
-            </div>
-            <div class="article-square featured-story" data-spot="tech-4">
+            <div
+              class="article-square"
+              data-spot="tech-4"
+              style="height: 350px"
+            >
               tech-4
             </div>
-            <div class="article-square featured-story" data-spot="tech-5">
+            <div
+              class="article-square"
+              data-spot="tech-5"
+              style="height: 350px"
+            >
               tech-5
             </div>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            <div class="article-square featured-story" data-spot="tech-6">
+            <div
+              class="article-square"
+              data-spot="tech-6"
+              style="height: 350px"
+            >
               tech-6
             </div>
-            <div class="article-square featured-story" data-spot="tech-7">
+            <div
+              class="article-square"
+              data-spot="tech-7"
+              style="height: 350px"
+            >
               tech-7
             </div>
-            <div class="article-square featured-story" data-spot="tech-8">
+          </div>
+
+          <!-- Row 2: tech-8, tech-9 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-0">
+            <div
+              class="article-square"
+              data-spot="tech-8"
+              style="height: 350px"
+            >
               tech-8
+            </div>
+            <div
+              class="article-square"
+              data-spot="tech-9"
+              style="height: 350px"
+            >
+              tech-9
+            </div>
+          </div>
+        </section>
+
+        <!-- Latest Stories Section: tech-10 through tech-13 -->
+        <section class="py-8">
+          <h2
+            class="font-display text-slate-blue dark:text-background-light text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 border-b border-steel-blue/20 dark:border-heather-gray/20 mb-0"
+          >
+            Latest Stories
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
+            <div
+              class="article-square"
+              data-spot="tech-10"
+              style="height: 350px"
+            >
+              tech-10
+            </div>
+            <div
+              class="article-square"
+              data-spot="tech-11"
+              style="height: 350px"
+            >
+              tech-11
+            </div>
+            <div
+              class="article-square"
+              data-spot="tech-12"
+              style="height: 350px"
+            >
+              tech-12
+            </div>
+            <div
+              class="article-square"
+              data-spot="tech-13"
+              style="height: 350px"
+            >
+              tech-13
             </div>
           </div>
         </section>
@@ -223,25 +299,22 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="col-span-2 md:col-span-1">
             <div class="flex items-center gap-3 text-white mb-4">
-              <div class="size-6 text-primary">
-                <svg
-                  fill="none"
-                  viewbox="0 0 48 48"
-                  xmlns="http://www.w3.org/2000/svg"
+              <img
+                src="assets/logo.png"
+                alt="The News Curator Logo"
+                class="h-10 w-10"
+              />
+              <div>
+                <h2
+                  class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
                 >
-                  <path
-                    d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
+                  The News Curator
+                </h2>
+                <p class="text-heather-gray text-xs font-medium">
+                  Curating the news that matters
+                </p>
               </div>
-              <h2
-                class="font-display text-white text-xl font-bold leading-tight"
-              >
-                The News Curator
-              </h2>
             </div>
-            <p class="text-sm">Your trusted source for verified news</p>
           </div>
           <div>
             <h3
@@ -250,7 +323,7 @@
               Sections
             </h3>
             <nav class="flex flex-col space-y-2">
-              <a class="hover:text-white transition-colors" href="index.html"
+              <a class="hover:text-white transition-colors" href="world.html"
                 >World</a
               >
               <a
@@ -264,27 +337,6 @@
               <a class="hover:text-white transition-colors" href="politics.html"
                 >Politics</a
               >
-              <a class="hover:text-white transition-colors" href="economy.html"
-                >Economy</a
-              >
-              <a
-                class="hover:text-white transition-colors"
-                href="environment.html"
-                >Environment</a
-              >
-              <a
-                class="hover:text-white transition-colors"
-                href="education.html"
-                >Education</a
-              >
-              <a
-                class="hover:text-white transition-colors"
-                href="law-crime.html"
-                >Law & Crime</a
-              >
-              <a class="hover:text-white transition-colors" href="science.html"
-                >Science</a
-              >
             </nav>
           </div>
           <div>
@@ -294,52 +346,13 @@
               About
             </h3>
             <nav class="flex flex-col space-y-2">
-              <a class="hover:text-white transition-colors" href="#"
+              <a
+                class="hover:text-white transition-colors"
+                href="transparency.html"
                 >Transparency</a
               >
-              <a class="hover:text-white transition-colors" href="#"
-                >AI Policy</a
-              >
               <a class="hover:text-white transition-colors" href="#">Contact</a>
-              <a class="hover:text-white transition-colors" href="#"
-                >Privacy Policy</a
-              >
             </nav>
-          </div>
-          <div>
-            <h3
-              class="font-bold text-white tracking-wider uppercase text-sm mb-3"
-            >
-              Follow Us
-            </h3>
-            <div class="flex space-x-4">
-              <a class="hover:text-white transition-colors" href="#">
-                <svg
-                  aria-hidden="true"
-                  class="h-6 w-6"
-                  fill="currentColor"
-                  viewbox="0 0 24 24"
-                >
-                  <path
-                    clip-rule="evenodd"
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                    fill-rule="evenodd"
-                  ></path>
-                </svg>
-              </a>
-              <a class="hover:text-white transition-colors" href="#">
-                <svg
-                  aria-hidden="true"
-                  class="h-6 w-6"
-                  fill="currentColor"
-                  viewbox="0 0 24 24"
-                >
-                  <path
-                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
-                  ></path>
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
         <div
@@ -349,15 +362,5 @@
         </div>
       </div>
     </footer>
-
-    <!-- Simple article loader -->
-    <script src="js/simple-articles.js"></script>
-
-    <script>
-      // Simple initialization
-      document.addEventListener('DOMContentLoaded', function () {
-        console.log('Technology page loaded');
-      });
-    </script>
   </body>
 </html>

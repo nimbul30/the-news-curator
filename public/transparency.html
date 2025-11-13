@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Article Transparency Report - The News Curator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&amp;family=Inter:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link href="/css/main.css" rel="stylesheet" />
-    <script>
+    <script id="tailwind-config">
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
@@ -18,29 +26,43 @@
               'slate-blue': '#313e52',
               'steel-blue': '#496a8a',
               'heather-gray': '#a2b1b3',
-              'pr-background': '#6b7d91',
-              'pr-nav': '#d8d3c4',
-              'pr-primary': '#182a38',
-              'pr-secondary': '#757d7f',
-              'pr-text-accent': '#eae7db',
-              'card-bg': '#eae7db',
             },
             fontFamily: {
-              display: ['Playfair Display', 'serif'],
-              body: ['Roboto', 'sans-serif'],
+              display: ['Lora', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
             },
           },
         },
       };
     </script>
+    <style type="text/tailwindcss">
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
     <style>
       .transparency-section {
-        background: white;
-        border-radius: 8px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        color: black;
+        background: linear-gradient(to bottom, #e0f2fe 0%, #f1f5f9 100%);
+        border-radius: 12px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 4px 12px rgba(148, 163, 184, 0.15),
+          0 2px 6px rgba(148, 163, 184, 0.1);
+        border: 1px solid #cbd5e1;
+        color: #000000;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .transparency-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(148, 163, 184, 0.2),
+          0 4px 10px rgba(148, 163, 184, 0.15);
       }
 
       /* Markdown Content Styling */
@@ -51,7 +73,7 @@
         font-weight: 700;
         margin-top: 1.5rem;
         margin-bottom: 0.75rem;
-        color: #182a38;
+        color: #000000;
       }
 
       .transparency-section h2 {
@@ -67,11 +89,12 @@
       .transparency-section p {
         margin-bottom: 1rem;
         line-height: 1.7;
+        color: #000000;
       }
 
       .transparency-section strong {
         font-weight: 700;
-        color: #182a38;
+        color: #000000;
       }
 
       .transparency-section em {
@@ -79,13 +102,13 @@
       }
 
       .transparency-section a {
-        color: #3e84b6;
+        color: #3b82f6;
         text-decoration: underline;
         transition: color 0.2s;
       }
 
       .transparency-section a:hover {
-        color: #2d6a94;
+        color: #2563eb;
       }
 
       .transparency-section ul,
@@ -107,34 +130,35 @@
       }
 
       .transparency-section blockquote {
-        border-left: 4px solid #3e84b6;
+        border-left: 4px solid #60a5fa;
         padding-left: 1.5rem;
         margin: 1rem 0;
         font-style: italic;
-        color: #496a8a;
-        background: #f6f7f8;
+        color: #000000;
+        background: rgba(255, 255, 255, 0.5);
         padding: 1rem 1.5rem;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
       }
 
       .transparency-section code {
-        background: #f6f7f8;
+        background: rgba(255, 255, 255, 0.6);
         padding: 0.2rem 0.4rem;
         border-radius: 0.25rem;
         font-size: 0.9em;
+        color: #000000;
       }
       .section-header {
-        border-bottom: 3px solid #182a38;
+        border-bottom: 2px solid #cbd5e1;
         padding-bottom: 0.75rem;
         margin-bottom: 1.5rem;
       }
       .source-card {
-        background: #f8f9fa;
-        border-left: 4px solid #3b82f6;
+        background: rgba(255, 255, 255, 0.6);
+        border-left: 4px solid #60a5fa;
         padding: 1rem;
         margin-bottom: 1rem;
-        border-radius: 4px;
-        color: black;
+        border-radius: 8px;
+        color: #000000;
       }
       .rating-badge {
         display: inline-block;
@@ -156,51 +180,53 @@
         color: white;
       }
       .claim-item {
-        background: #f0f9ff;
-        border-left: 4px solid #0ea5e9;
+        background: rgba(255, 255, 255, 0.6);
+        border-left: 4px solid #60a5fa;
         padding: 1rem;
         margin-bottom: 1rem;
-        border-radius: 4px;
-        color: black;
+        border-radius: 8px;
+        color: #000000;
       }
       .bias-item {
-        background: #fef3c7;
-        border-left: 4px solid #f59e0b;
+        background: rgba(255, 255, 255, 0.6);
+        border-left: 4px solid #94a3b8;
         padding: 1rem;
         margin-bottom: 1rem;
-        border-radius: 4px;
-        color: black;
+        border-radius: 8px;
+        color: #000000;
       }
       .special-report-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: rgba(255, 255, 255, 0.6);
+        color: #000000;
         padding: 2rem;
         border-radius: 12px;
         margin-bottom: 1.5rem;
+        border-left: 4px solid #60a5fa;
       }
       .reading-suggestion-card {
-        background: #f8f9fa;
-        border: 2px solid #e5e7eb;
-        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1rem;
         transition: all 0.3s ease;
-        color: black;
+        color: #334155;
       }
       .reading-suggestion-card:hover {
-        border-color: #3b82f6;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        border-color: #60a5fa;
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
         transform: translateY(-2px);
       }
       .suggestion-tag {
         display: inline-block;
-        background: #3b82f6;
-        color: white;
+        background: #dbeafe;
+        color: #1e40af;
         padding: 0.25rem 0.75rem;
         border-radius: 12px;
         font-size: 0.75rem;
         font-weight: 600;
         margin-right: 0.5rem;
+        border: 1px solid #93c5fd;
       }
       .print-button {
         position: fixed;
@@ -219,7 +245,7 @@
       }
     </style>
   </head>
-  <body class="bg-pr-background">
+  <body class="bg-background-light dark:bg-background-dark font-sans">
     <!-- TopNavBar - Sticky -->
     <header
       class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-blue/20 dark:border-steel-blue/30 px-6 md:px-10 lg:px-20 py-4 bg-slate-blue text-heather-gray"
@@ -302,14 +328,22 @@
         >
       </nav>
 
-      <!-- Right Side Actions -->
-      <div class="flex items-center gap-3">
-        <button
-          onclick="window.print()"
-          class="bg-blue-600/20 text-white px-3 py-1 rounded-md hover:bg-blue-600/30 transition-colors text-sm font-medium"
-        >
-          🖨️ Print
-        </button>
+      <!-- Search Bar -->
+      <div class="flex items-center">
+        <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+          <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+            <div
+              class="text-heather-gray flex border-none bg-steel-blue/50 items-center justify-center pl-3 rounded-l-lg border-r-0"
+            >
+              <span class="material-symbols-outlined">search</span>
+            </div>
+            <input
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-steel-blue/50 focus:border-none h-full placeholder:text-heather-gray px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+              placeholder="Search"
+              value=""
+            />
+          </div>
+        </label>
       </div>
     </header>
 
@@ -360,7 +394,7 @@
           </h2>
         </div>
         <div id="summary-content" class="prose max-w-none">
-          <p class="text-black leading-relaxed">Loading summary...</p>
+          <p class="text-white leading-relaxed">Loading summary...</p>
         </div>
       </div>
 
@@ -475,25 +509,22 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="col-span-2 md:col-span-1">
             <div class="flex items-center gap-3 text-white mb-4">
-              <div class="size-6 text-primary">
-                <svg
-                  fill="none"
-                  viewbox="0 0 48 48"
-                  xmlns="http://www.w3.org/2000/svg"
+              <img
+                src="assets/logo.png"
+                alt="The News Curator Logo"
+                class="h-10 w-10"
+              />
+              <div>
+                <h2
+                  class="font-display text-white text-xl font-bold leading-tight tracking-[-0.015em]"
                 >
-                  <path
-                    d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
+                  The News Curator
+                </h2>
+                <p class="text-heather-gray text-xs font-medium">
+                  Curating the news that matters
+                </p>
               </div>
-              <h2
-                class="font-display text-white text-xl font-bold leading-tight"
-              >
-                The News Curator
-              </h2>
             </div>
-            <p class="text-sm">Your trusted source for verified news</p>
           </div>
           <div>
             <h3

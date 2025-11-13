@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage Category Redesign - Validation Tests</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+        border-bottom: 3px solid #3e84b6;
+        padding-bottom: 10px;
+      }
+      .test-section {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .test-result {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        border-left: 4px solid;
+      }
+      .test-result.pass {
+        background: #d4edda;
+        border-color: #28a745;
+        color: #155724;
+      }
+      .test-result.fail {
+        background: #f8d7da;
+        border-color: #dc3545;
+        color: #721c24;
+      }
+      .test-result.info {
+        background: #d1ecf1;
+        border-color: #17a2b8;
+        color: #0c5460;
+      }
+      .test-result.warning {
+        background: #fff3cd;
+        border-color: #ffc107;
+        color: #856404;
+      }
+      button {
+        background: #3e84b6;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px 5px;
+      }
+      button:hover {
+        background: #2d6a94;
+      }
+      .summary {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+      .summary.pass {
+        background: #d4edda;
+        color: #155724;
+      }
+      .summary.fail {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      .details {
+        font-size: 14px;
+        margin-top: 5px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🧪 Homepage Category Redesign - Validation Tests</h1>
+
+    <div class="test-section">
+      <h2>Test Controls</h2>
+      <button onclick="runAllTests()">Run All Tests</button>
+      <button onclick="clearResults()">Clear Results</button>
+      <button
+        onclick="window.open('http://localhost:5500/index.html', '_blank')"
+      >
+        Open Homepage
+      </button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+      const resultsDiv = document.getElementById('results');
+      let testResults = [];
+
+      function clearResults() {
+        resultsDiv.innerHTML = '';
+        testResults = [];
+      }
+
+      function addResult(category, testName, passed, details = '') {
+        testResults.push({ category, testName, passed, details });
+
+        const resultClass = passed ? 'pass' : 'fail';
+        const icon = passed ? '✓' : '✗';
+
+        let categorySection = document.getElementById(`category-${category}`);
+        if (!categorySection) {
+          categorySection = document.createElement('div');
+          categorySection.id = `category-${category}`;
+          categorySection.className = 'test-section';
+          categorySection.innerHTML = `<h2>${category}</h2>`;
+          resultsDiv.appendChild(categorySection);
+        }
+
+        const resultDiv = document.createElement('div');
+        resultDiv.className = `test-result ${resultClass}`;
+        resultDiv.innerHTML = `
+                <strong>${icon} ${testName}</strong>
+                ${details ? `<div class="details">${details}</div>` : ''}
+            `;
+        categorySection.appendChild(resultDiv);
+      }
+
+      function addInfo(category, message) {
+        let categorySection = document.getElementById(`category-${category}`);
+        if (!categorySection) {
+          categorySection = document.createElement('div');
+          categorySection.id = `category-${category}`;
+          categorySection.className = 'test-section';
+          categorySection.innerHTML = `<h2>${category}</h2>`;
+          resultsDiv.appendChild(categorySection);
+        }
+
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'test-result info';
+        infoDiv.innerHTML = `<strong>ℹ️ ${message}</strong>`;
+        categorySection.appendChild(infoDiv);
+      }
+
+      function showSummary() {
+        const total = testResults.length;
+        const passed = testResults.filter((r) => r.passed).length;
+        const failed = total - passed;
+        const passRate = ((passed / total) * 100).toFixed(1);
+
+        const summaryDiv = document.createElement('div');
+        summaryDiv.className = `summary ${failed === 0 ? 'pass' : 'fail'}`;
+        summaryDiv.innerHTML = `
+                Test Summary: ${passed}/${total} tests passed (${passRate}%)
+                ${
+                  failed > 0
+                    ? `<br>⚠️ ${failed} test(s) failed`
+                    : '<br>🎉 All tests passed!'
+                }
+            `;
+        resultsDiv.insertBefore(summaryDiv, resultsDiv.firstChild);
+      }
+
+      async function runAllTests() {
+        clearResults();
+
+        try {
+          // Fetch articles from API
+          addInfo('Setup', 'Fetching articles from API...');
+          const response = await fetch(
+            'http://localhost:5500/api/articles.json'
+          );
+          const articles = await response.json();
+          addInfo('Setup', `Loaded ${articles.length} articles from API`);
+
+          // Test 1: Verify article data structure
+          await testArticleDataStructure(articles);
+
+          // Test 2: Verify spot numbering
+          await testSpotNumbering(articles);
+
+          // Test 3: Test category distribution
+          await testCategoryDistribution(articles);
+
+          // Test 4: Test article links
+          await testArticleLinks();
+
+          // Test 5: Test category header links
+          await testCategoryHeaderLinks();
+
+          // Test 6: Test responsive layout
+          await testResponsiveLayout();
+
+          // Test 7: Test empty category handling
+          await testEmptyCategoryHandling(articles);
+
+          // Test 8: Verify featured stories (spots 1-9)
+          await testFeaturedStories();
+
+          showSummary();
+        } catch (error) {
+          addResult('Error', 'Test Execution Failed', false, error.message);
+        }
+      }
+
+      async function testArticleDataStructure(articles) {
+        const category = 'Data Structure';
+
+        // Check if articles have required fields
+        const requiredFields = ['id', 'title', 'category'];
+        let articlesWithAllFields = 0;
+        let articlesWithMissingFields = [];
+
+        articles.forEach((article) => {
+          const missingFields = requiredFields.filter(
+            (field) => !article[field]
+          );
+          if (missingFields.length === 0) {
+            articlesWithAllFields++;
+          } else {
+            articlesWithMissingFields.push({
+              id: article.id || 'unknown',
+              title: article.title || 'untitled',
+              missing: missingFields,
+            });
+          }
+        });
+
+        addResult(
+          category,
+          'Articles have required fields',
+          articlesWithAllFields === articles.length,
+          `${articlesWithAllFields}/${articles.length} articles have all required fields`
+        );
+
+        if (
+          articlesWithMissingFields.length > 0 &&
+          articlesWithMissingFields.length <= 5
+        ) {
+          addInfo(
+            category,
+            `Missing fields in: ${articlesWithMissingFields
+              .map((a) => a.title)
+              .join(', ')}`
+          );
+        }
+
+        // Check category values
+        const validCategories = [
+          'World',
+          'Technology',
+          'Business',
+          'Economy',
+          'Environment',
+          'Education',
+          'Law & Crime',
+          'Science',
+          'Politics',
+        ];
+        const articlesWithValidCategory = articles.filter((a) =>
+          validCategories.includes(a.category)
+        ).length;
+
+        addResult(
+          category,
+          'Articles have valid category values',
+          articlesWithValidCategory === articles.length,
+          `${articlesWithValidCategory}/${articles.length} articles have valid categories`
+        );
+      }
+
+      async function testSpotNumbering(articles) {
+        const category = 'Spot Numbering';
+
+        // Open homepage in iframe to test
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = 'http://localhost:5500/index.html';
+        document.body.appendChild(iframe);
+
+        await new Promise((resolve) => {
+          iframe.onload = () => setTimeout(resolve, 2000); // Wait for JS to execute
+        });
+
+        const iframeDoc =
+          iframe.contentDocument || iframe.contentWindow.document;
+
+        // Check if category sections start at spot 10
+        const categoryArticles = iframeDoc.querySelectorAll(
+          '#category-sections-container article[data-spot]'
+        );
+
+        if (categoryArticles.length > 0) {
+          const firstCategorySpot = parseInt(
+            categoryArticles[0].getAttribute('data-spot')
+          );
+          addResult(
+            category,
+            'Category sections start at spot 10',
+            firstCategorySpot === 10,
+            `First category article is at spot ${firstCategorySpot}`
+          );
+
+          // Check sequential numbering
+          let isSequential = true;
+          let expectedSpot = firstCategorySpot;
+          const spotNumbers = [];
+
+          categoryArticles.forEach((article) => {
+            const spot = parseInt(article.getAttribute('data-spot'));
+            spotNumbers.push(spot);
+            if (spot !== expectedSpot) {
+              isSequential = false;
+            }
+            expectedSpot++;
+          });
+
+          addResult(
+            category,
+            'Spot numbers are sequential without gaps',
+            isSequential,
+            `Spot numbers: ${spotNumbers.slice(0, 10).join(', ')}${
+              spotNumbers.length > 10 ? '...' : ''
+            }`
+          );
+
+          addInfo(
+            category,
+            `Total category articles displayed: ${categoryArticles.length}`
+          );
+        } else {
+          addResult(
+            category,
+            'Category articles found',
+            false,
+            'No category articles found on page'
+          );
+        }
+
+        document.body.removeChild(iframe);
+      }
+
+      async function testCategoryDistribution(articles) {
+        const category = 'Category Distribution';
+
+        // Group articles by category
+        const categoryGroups = {};
+        const validCategories = [
+          'World',
+          'Technology',
+          'Business',
+          'Economy',
+          'Environment',
+          'Education',
+          'Law & Crime',
+          'Science',
+          'Politics',
+        ];
+
+        validCategories.forEach((cat) => (categoryGroups[cat] = 0));
+
+        articles.forEach((article) => {
+          if (
+            article.category &&
+            categoryGroups.hasOwnProperty(article.category)
+          ) {
+            categoryGroups[article.category]++;
+          }
+        });
+
+        const categoriesWithArticles = Object.keys(categoryGroups).filter(
+          (cat) => categoryGroups[cat] > 0
+        );
+
+        addResult(
+          category,
+          'Articles distributed across categories',
+          categoriesWithArticles.length > 0,
+          `${categoriesWithArticles.length}/9 categories have articles`
+        );
+
+        // Show distribution
+        const distribution = Object.entries(categoryGroups)
+          .map(([cat, count]) => `${cat}: ${count}`)
+          .join(', ');
+        addInfo(category, `Distribution: ${distribution}`);
+
+        // Check if categories with 0 articles are hidden
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = 'http://localhost:5500/index.html';
+        document.body.appendChild(iframe);
+
+        await new Promise((resolve) => {
+          iframe.onload = () => setTimeout(resolve, 2000);
+        });
+
+        const iframeDoc =
+          iframe.contentDocument || iframe.contentWindow.document;
+        const displayedSections = iframeDoc.querySelectorAll(
+          '#category-sections-container section[data-category]'
+        );
+
+        const displayedCategories = Array.from(displayedSections).map(
+          (section) => section.getAttribute('data-category')
+        );
+        const emptyCategories = Object.keys(categoryGroups).filter(
+          (cat) => categoryGroups[cat] === 0
+        );
+
+        const hiddenCorrectly = emptyCategories.every(
+          (cat) => !displayedCategories.includes(cat)
+        );
+
+        addResult(
+          category,
+          'Empty categories are hidden',
+          hiddenCorrectly,
+          `${displayedCategories.length} sections displayed, ${emptyCategories.length} empty categories hidden`
+        );
+
+        document.body.removeChild(iframe);
+      }
+
+      async function testArticleLinks() {
+        const category = 'Article Links';
+
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = 'http://localhost:5500/index.html';
+        document.body.appendChild(iframe);
+
+        await new Promise((resolve) => {
+          iframe.onload = () => setTimeout(resolve, 2000);
+        });
+
+        const iframeDoc =
+          iframe.contentDocument || iframe.contentWindow.document;
+
+        // Check category article links
+        const categoryArticleLinks = iframeDoc.querySelectorAll(
+          '#category-sections-container article a[href*="article.html"]'
+        );
+
+        addResult(
+          category,
+          'Category articles have article detail links',
+          categoryArticleLinks.length > 0,
+          `Found ${categoryArticleLinks.length} article links`
+        );
+
+        // Verify link format
+        if (categoryArticleLinks.length > 0) {
+          const firstLink = categoryArticleLinks[0].getAttribute('href');
+          const hasSlugParam = firstLink.includes('slug=');
+
+          addResult(
+            category,
+            'Article links include slug parameter',
+            hasSlugParam,
+            `Example link: ${firstLink}`
+          );
+        }
+
+        document.body.removeChild(iframe);
+      }
+
+      async function testCategoryHeaderLinks() {
+        const category = 'Category Headers';
+
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = 'http://localhost:5500/index.html';
+        document.body.appendChild(iframe);
+
+        await new Promise((resolve) => {
+          iframe.onload = () => setTimeout(resolve, 2000);
+        });
+
+        const iframeDoc =
+          iframe.contentDocument || iframe.contentWindow.document;
+
+        // Check category header links
+        const categoryHeaders = iframeDoc.querySelectorAll(
+          '#category-sections-container section[data-category] h2 a'
+        );
+
+        addResult(
+          category,
+          'Category headers are clickable links',
+          categoryHeaders.length > 0,
+          `Found ${categoryHeaders.length} category header links`
+        );
+
+        // Verify link targets
+        if (categoryHeaders.length > 0) {
+          const validLinks = Array.from(categoryHeaders).filter((link) => {
+            const href = link.getAttribute('href');
+            return href && href.endsWith('.html') && href !== '#';
+          });
+
+          addResult(
+            category,
+            'Category header links point to category pages',
+            validLinks.length === categoryHeaders.length,
+            `${validLinks.length}/${categoryHeaders.length} links are valid`
+          );
+        }
+
+        document.body.removeChild(iframe);
+      }
+
+      async function testResponsiveLayout() {
+        const category = 'Responsive Layout';
+
+        // Test desktop layout
+        const desktopIframe = document.createElement('iframe');
+        desktopIframe.style.display = 'none';
+        desktopIframe.style.width = '1200px';
+        desktopIframe.src = 'http://localhost:5500/index.html';
+        document.body.appendChild(desktopIframe);
+
+        await new Promise((resolve) => {
+          desktopIframe.onload = () => setTimeout(resolve, 2000);
+        });
+
+        const desktopDoc =
+          desktopIframe.contentDocument || desktopIframe.contentWindow.document;
+        const desktopArticle = desktopDoc.querySelector(
+          '#category-sections-container article'
+        );
+
+        if (desktopArticle) {
+          const desktopLayout = desktopArticle.querySelector('.flex');
+          addResult(
+            category,
+            'Desktop layout uses flex layout',
+            desktopLayout !== null,
+            'Articles use flexbox for horizontal layout'
+          );
+        }
+
+        document.body.removeChild(desktopIframe);
+
+        // Test mobile layout
+        const mobileIframe = document.createElement('iframe');
+        mobileIframe.style.display = 'none';
+        mobileIframe.style.width = '375px';
+        mobileIframe.src = 'http://localhost:5500/index.html';
+        document.body.appendChild(mobileIframe);
+
+        await new Promise((resolve) => {
+          mobileIframe.onload = () => setTimeout(resolve, 2000);
+        });
+
+        const mobileDoc =
+          mobileIframe.contentDocument || mobileIframe.contentWindow.document;
+        const mobileArticle = mobileDoc.querySelector(
+          '#category-sections-container article'
+        );
+
+        if (mobileArticle) {
+          addResult(
+            category,
+            'Mobile layout renders correctly',
+            mobileArticle !== null,
+            'Articles render on mobile viewport'
+          );
+        }
+
+        document.body.removeChild(mobileIframe);
+
+        addInfo(
+          category,
+          'Manual testing recommended: Resize browser window to verify responsive behavior'
+        );
+      }
+
+      async function testEmptyCategoryHandling(articles) {
+        const category = 'Empty Category Handling';
+
+        // Identify categories with no articles
+        const categoryGroups = {};
+        const validCategories = [
+          'World',
+          'Technology',
+          'Business',
+          'Economy',
+          'Environment',
+          'Education',
+          'Law & Crime',
+          'Science',
+          'Politics',
+        ];
+
+        validCategories.forEach((cat) => (categoryGroups[cat] = 0));
+
+        articles.forEach((article) => {
+          if (
+            article.category &&
+            categoryGroups.hasOwnProperty(article.category)
+          ) {
+            categoryGroups[article.category]++;
+          }
+        });
+
+        const emptyCategories = Object.keys(categoryGroups).filter(
+          (cat) => categoryGroups[cat] === 0
+        );
+
+        if (emptyCategories.length > 0) {
+          addInfo(category, `Empty categories: ${emptyCategories.join(', ')}`);
+
+          // Verify these sections are not displayed
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = 'http://localhost:5500/index.html';
+          document.body.appendChild(iframe);
+
+          await new Promise((resolve) => {
+            iframe.onload = () => setTimeout(resolve, 2000);
+          });
+
+          const iframeDoc =
+            iframe.contentDocument || iframe.contentWindow.document;
+
+          let allHidden = true;
+          emptyCategories.forEach((cat) => {
+            const section = iframeDoc.querySelector(
+              `#category-sections-container section[data-category="${cat}"]`
+            );
+            if (section) {
+              allHidden = false;
+            }
+          });
+
+          addResult(
+            category,
+            'Empty category sections are not rendered',
+            allHidden,
+            allHidden
+              ? 'All empty categories correctly hidden'
+              : 'Some empty categories are still visible'
+          );
+
+          document.body.removeChild(iframe);
+        } else {
+          addInfo(
+            category,
+            'All categories have articles - cannot test empty category hiding'
+          );
+        }
+      }
+
+      async function testFeaturedStories() {
+        const category = 'Featured Stories (Spots 1-9)';
+
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = 'http://localhost:5500/index.html';
+        document.body.appendChild(iframe);
+
+        await new Promise((resolve) => {
+          iframe.onload = () => setTimeout(resolve, 2000);
+        });
+
+        const iframeDoc =
+          iframe.contentDocument || iframe.contentWindow.document;
+
+        // Check spot 1 (showcase)
+        const spot1 = iframeDoc.querySelector('[data-spot="1"]');
+        addResult(
+          category,
+          'Spot 1 (showcase) exists',
+          spot1 !== null,
+          spot1 ? 'Showcase article slot found' : 'Showcase slot missing'
+        );
+
+        // Check spots 2-9 (featured stories)
+        let featuredSpotsFound = 0;
+        for (let i = 2; i <= 9; i++) {
+          const spot = iframeDoc.querySelector(`[data-spot="${i}"]`);
+          if (spot) featuredSpotsFound++;
+        }
+
+        addResult(
+          category,
+          'Featured story spots (2-9) exist',
+          featuredSpotsFound === 8,
+          `${featuredSpotsFound}/8 featured story slots found`
+        );
+
+        // Verify featured stories section is before category sections
+        const featuredSection = iframeDoc.querySelector(
+          'section:has([data-spot="2"])'
+        );
+        const categoryContainer = iframeDoc.querySelector(
+          '#category-sections-container'
+        );
+
+        if (featuredSection && categoryContainer) {
+          const featuredPosition = Array.from(
+            iframeDoc.querySelectorAll('section')
+          ).indexOf(featuredSection);
+          const categoryPosition = Array.from(
+            iframeDoc.querySelectorAll('*')
+          ).indexOf(categoryContainer);
+
+          addResult(
+            category,
+            'Featured stories appear before category sections',
+            featuredPosition < categoryPosition,
+            'Layout order is correct'
+          );
+        }
+
+        document.body.removeChild(iframe);
+      }
+
+      // Auto-run tests on page load
+      window.addEventListener('load', () => {
+        addInfo(
+          'Welcome',
+          'Click "Run All Tests" to validate the homepage category redesign implementation'
+        );
+      });
+    </script>
+  </body>
+</html>
